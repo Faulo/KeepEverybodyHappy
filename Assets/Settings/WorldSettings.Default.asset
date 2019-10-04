@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ded827d8be94c4685757047a49e84c, type: 3}
   m_Name: WorldSettings.Default
   m_EditorClassIdentifier: 
-  width: 320
-  height: 240
+  width: 32
+  height: 24
   tilePrefab: {fileID: 6832667397439130640, guid: 10c2eb6457d103d42810bae23964213b,
     type: 3}
+  defaultFaction: {fileID: 11400000, guid: a768477ae08739543bd081bc33a4dd54, type: 2}
