@@ -1,0 +1,16 @@
+/*
+/*/
+
+!.gitattributes
+!.gitignore
+!.gitmodules
+!*.json
+!*.bat
+!*.vssettings
+
+!README.md
+!packages.config
+!app.config
+
+!/Assets/
+!/ProjectSettings/
