@@ -11,7 +11,7 @@ public interface ITile {
     bool DudeIsFaction(Faction faction);
     bool isZoneable { get; }
     Vector2Int position { get; set; }
-    float happiness { get; }
+    int happiness { get; }
     IEnumerable<ITile> neighboringTiles { get; set; }
     IEnumerable<ITile> accessibleTiles { get; set; }
 }

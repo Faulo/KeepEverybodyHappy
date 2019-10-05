@@ -23,4 +23,5 @@ MonoBehaviour:
   - {fileID: 11400000}
   - {fileID: 11400000, guid: d18dd990e3ccc6c4bb0a37847da7776e, type: 2}
   dislikesHavingAccessTo: []
-  dislikesBeingNextTo: []
+  dislikesBeingNextTo:
+  - {fileID: 11400000, guid: 43370dd3edaadee49bd9ad0f4d892ade, type: 2}
