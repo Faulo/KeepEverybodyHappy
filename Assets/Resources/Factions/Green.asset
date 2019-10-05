@@ -16,10 +16,10 @@ MonoBehaviour:
   color: {r: 0, g: 0.7924528, b: 0.13326073, a: 0}
   isDefault: 0
   isValuable: 0
-  likesAccessTo:
+  likesHavingAccessTo:
   - {fileID: 11400000, guid: b4349fe0f851abd498a95b3e166301ac, type: 2}
   likesBeingNextTo:
   - {fileID: 11400000}
-  dislikesAccessTo: []
+  dislikesHavingAccessTo: []
   dislikesBeingNextTo:
   - {fileID: 11400000, guid: 7b2146744c01dc144b33cfb0ade148fd, type: 2}
