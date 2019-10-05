@@ -38,6 +38,8 @@ public class DudeManager : MonoBehaviour
     public void DespawnDudes(IEnumerable<ITile> tiles) {
         foreach (var tile in tiles) {
             //???
+            Destroy(tile.dude.gameObject);
+            tile.dude = null;
         }
     }
 
