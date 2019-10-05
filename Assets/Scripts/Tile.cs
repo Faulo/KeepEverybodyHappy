@@ -28,6 +28,7 @@ public class Tile : MonoBehaviour, ITile {
     }
     private Faction factionCache;
     public Dude dude { get; set; }
+    public bool DudeIsFaction(Faction faction) => dude && dude.faction == faction;
     public Vector2Int position {
         get => positionCache;
         set {
@@ -115,6 +116,7 @@ public class Tile : MonoBehaviour, ITile {
                         }
                     }
                 }
+                accessibleTiles = checkedTiles;
             }
             return accessibleTilesCache;
         }

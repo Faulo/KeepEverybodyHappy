@@ -27,13 +27,17 @@ public class DudeManager : MonoBehaviour
 
     }
 
-    public void SpawnDudes(params Tile[] tiles)
-    {
-        foreach (var tile in tiles)
-        {
+    public void SpawnDudes(IEnumerable<ITile> tiles) {
+        foreach (var tile in tiles) {
             Dude dude = Instantiate(dudePrefab, tile.transform);
             dude.faction = tile.faction;
-            activeDudes.Add(dude);
+            tile.dude = dude;
+        }
+    }
+
+    public void DespawnDudes(IEnumerable<ITile> tiles) {
+        foreach (var tile in tiles) {
+            //???
         }
     }
 

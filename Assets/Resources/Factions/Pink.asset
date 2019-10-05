@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: Pink
   m_EditorClassIdentifier: 
   isActive: 1
-  color: {r: 0.8962264, g: 0.13105197, b: 0.8251678, a: 0}
+  tileColor: {r: 1, g: 0, b: 0.84147406, a: 0}
+  dudeColor: {r: 0.8189759, g: 0, b: 0.9056604, a: 0}
   isDefault: 0
+  isValuable: 0
+  likesHavingAccessTo: []
+  likesBeingNextTo: []
+  dislikesHavingAccessTo: []
+  dislikesBeingNextTo: []

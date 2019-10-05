@@ -352,6 +352,40 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99db8a2e1115c754ab35bb673054a54f, type: 3}
+--- !u!1001 &1688559875
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2880706112000836456, guid: 1974d2bf687214641a65bfc01d34f3fe,
+        type: 3}
+      propertyPath: m_Name
+      value: DudeManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880706112000836457, guid: 1974d2bf687214641a65bfc01d34f3fe,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880706112000836457, guid: 1974d2bf687214641a65bfc01d34f3fe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880706112000836457, guid: 1974d2bf687214641a65bfc01d34f3fe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880706112000836457, guid: 1974d2bf687214641a65bfc01d34f3fe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1974d2bf687214641a65bfc01d34f3fe, type: 3}
 --- !u!1 &1862357862
 GameObject:
   m_ObjectHideFlags: 0

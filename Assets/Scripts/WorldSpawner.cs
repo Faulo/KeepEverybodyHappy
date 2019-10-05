@@ -12,8 +12,8 @@ public class WorldSpawner : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         var world = new World(worldSettings, transform);
-        FindObjectOfType<Canvas>()
-            .GetComponentsInChildren<IWorldObserver>()
+        FindObjectsOfType<Transform>()
+            .SelectMany(t => t.GetComponents<IWorldObserver>())
             .ForAll(observer => world.onLevelLoad += observer.Observe);
         world.LoadLevel(worldSettings.levels[0]);
     }

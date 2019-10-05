@@ -28,13 +28,13 @@ public class DebugPanel : MonoBehaviour, IWorldObserver {
     void Update() {
         if (world != null && level != null) {
             text.text = "";
-            foreach (var faction in factions) {
-                var tiles = world.tiles.Where(tile => tile.faction == faction.faction);
+            foreach (var factionInstance in factions) {
+                var tiles = world.tiles.Where(tile => tile.DudeIsFaction(factionInstance.faction));
                 text.text += string.Format(
                     "{0} ({1}/{2}): {3}\n",
-                    faction.faction.name,
+                    factionInstance.faction.name,
                     tiles.Count(),
-                    faction.numberOfDudes,
+                    factionInstance.numberOfDudes,
                     tiles.Sum(tile => tile.happiness)
                 );
             }

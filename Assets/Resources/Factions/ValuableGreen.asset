@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: ValuableGreen
   m_EditorClassIdentifier: 
   isActive: 1
-  color: {r: 0.21191151, g: 0.6320754, b: 0.18187074, a: 0}
+  tileColor: {r: 0, g: 0.9622642, b: 0.26917285, a: 0}
+  dudeColor: {r: 0, g: 0, b: 0, a: 0}
   isDefault: 0
   isValuable: 1
-  likesAccessTo: []
+  likesHavingAccessTo: []
   likesBeingNextTo: []
-  dislikesAccessTo: []
+  dislikesHavingAccessTo: []
   dislikesBeingNextTo: []

@@ -208,8 +208,6 @@ public class SelectionDrawer : MonoBehaviour
 
             if (item.Value.tileHighlight.unfinished && (newValue >= 1f || newValue <= 0f))
             {
-                if (newValue >= 1f)
-                    DudeManager.instance.SpawnDudes(item.Key);
                 markedTilesWithFaction.Remove(item.Key);
                 item.Value.tileHighlight.mat.SetColor("_BaseColor", item.Key.faction.tileColor);
             }
