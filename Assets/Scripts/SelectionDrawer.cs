@@ -38,7 +38,7 @@ public class SelectionDrawer : MonoBehaviour
         private set => selectionCenter = value;
     }
 
-    private const float ZPOSITION = 29f;
+    private const float YPOSITION = 1f;
 
     private Collider[] hitColliders = new Collider[100];
     [SerializeField] private LayerMask hitMask;
@@ -71,7 +71,7 @@ public class SelectionDrawer : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             drawStartPoint = cam.ScreenToWorldPoint(Input.mousePosition);
-            drawStartPoint.z = ZPOSITION;
+            drawStartPoint.y = YPOSITION;
             meshRenderer.enabled = true;
         }
         else if (Input.GetMouseButtonUp(0))
@@ -88,7 +88,7 @@ public class SelectionDrawer : MonoBehaviour
         if (Draw)
         {
             drawEndPoint = cam.ScreenToWorldPoint(Input.mousePosition);
-            drawEndPoint.z = ZPOSITION;
+            drawEndPoint.y = YPOSITION;
             DefineSelectionArea();
             DrawSelection();
         }
@@ -101,20 +101,20 @@ public class SelectionDrawer : MonoBehaviour
 
     private void DefineSelectionArea()
     {
-        SelectionSize = new Vector2((drawStartPoint.x - drawEndPoint.x), (drawStartPoint.y - drawEndPoint.y)) * -1;
-        SelectionCenter = drawStartPoint + new Vector3(SelectionSize.x * .5f, SelectionSize.y * .5f, 0f);
-        boxCollider.center = SelectionCenter;
-        boxCollider.size = new Vector3(SelectionSize.x, SelectionSize.y, 2f);
+        SelectionSize = new Vector2((drawStartPoint.x - drawEndPoint.x), (drawStartPoint.z - drawEndPoint.z)) * -1f;
+        SelectionCenter = drawStartPoint + new Vector3(SelectionSize.x * .5f, 2f, SelectionSize.y * .5f);
+        boxCollider.center = new Vector3(SelectionCenter.x, 1f, SelectionCenter.z);
+        boxCollider.size = new Vector3(SelectionSize.x, 2f, SelectionSize.y);
     }
 
     private void DrawSelection()
     {
         verts[0] = drawStartPoint;
-        verts[1] = new Vector3(drawStartPoint.x, drawEndPoint.y, ZPOSITION);
-        verts[4] = new Vector3(drawEndPoint.x, drawStartPoint.y, ZPOSITION);
+        verts[1] = new Vector3(drawStartPoint.x, YPOSITION, drawEndPoint.z);
+        verts[4] = new Vector3(drawEndPoint.x, YPOSITION, drawStartPoint.z);
 
-        verts[2] = new Vector3(drawEndPoint.x, drawStartPoint.y, ZPOSITION);
-        verts[5] = new Vector3(drawStartPoint.x, drawEndPoint.y, ZPOSITION);
+        verts[2] = new Vector3(drawEndPoint.x, YPOSITION, drawStartPoint.z);
+        verts[5] = new Vector3(drawStartPoint.x, YPOSITION, drawEndPoint.z);
 
         verts[3] = drawEndPoint;
 
