@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SelectionDrawer : MonoBehaviour
 {
-
     private MeshFilter meshFilter;
     private Mesh mesh;
+    private BoxCollider boxCollider;
 
     [SerializeField] private bool draw;
     public bool Draw
@@ -15,18 +15,46 @@ public class SelectionDrawer : MonoBehaviour
         private set => draw = value;
     }
 
+    private Vector3[] verts = new Vector3[6];
+    private int[] triangles = new int[12];
+    Vector2[] uvs = new Vector2[6];
+
     private Vector3 drawStartPoint;
     private Vector3 drawEndPoint;
 
-    private const float ZPOSITION = -1f;
+    private Vector2 selectionSize;
+    public Vector2 SelectionSize
+    {
+        get => selectionSize;
+        private set => selectionSize = value;
+    }
+
+    private Vector3 selectionCenter;
+    public Vector3 SelectionCenter
+    {
+        get => selectionCenter;
+        private set => selectionCenter = value;
+    }
+
+    private const float ZPOSITION = 29f;
+
+    private Collider[] hitColliders = new Collider[100];
+    [SerializeField] private LayerMask hitMask;
 
     private Camera cam;
+
+
+    [Header("Factions")]
+    [SerializeField] private Faction none;
+    [SerializeField] private Faction green;
+    [SerializeField] private Faction pink;
 
     private void Awake()
     {
         meshFilter = GetComponent<MeshFilter>();
         mesh = meshFilter.mesh;
         cam = Camera.main;
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     private void Start()
@@ -34,7 +62,7 @@ public class SelectionDrawer : MonoBehaviour
 
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -48,6 +76,7 @@ public class SelectionDrawer : MonoBehaviour
         {
             drawEndPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             drawEndPoint.z = ZPOSITION;
+            DefineSelectionArea();
             DrawSelection();
         }
     }
@@ -55,13 +84,19 @@ public class SelectionDrawer : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(drawStartPoint, drawEndPoint);
+        Gizmos.DrawWireCube(SelectionCenter, SelectionSize);
+    }
+
+    private void DefineSelectionArea()
+    {
+        SelectionSize = new Vector2((drawStartPoint.x - drawEndPoint.x), (drawStartPoint.y - drawEndPoint.y)) * -1;
+        SelectionCenter = drawStartPoint + new Vector3(SelectionSize.x * .5f, SelectionSize.y * .5f, 0f);
+        boxCollider.center = SelectionCenter;
+        boxCollider.size = new Vector3(SelectionSize.x, SelectionSize.y, 2f);
     }
 
     private void DrawSelection()
     {
-        Vector3[] verts = new Vector3[6];
-
         verts[0] = drawStartPoint;
         verts[1] = new Vector3(drawStartPoint.x, drawEndPoint.y, ZPOSITION);
         verts[4] = new Vector3(drawEndPoint.x, drawStartPoint.y, ZPOSITION);
@@ -71,7 +106,6 @@ public class SelectionDrawer : MonoBehaviour
 
         verts[3] = drawEndPoint;
 
-        int[] triangles = new int[12];
         triangles[0] = 0;
         triangles[1] = 1;
         triangles[2] = 3;
@@ -88,11 +122,28 @@ public class SelectionDrawer : MonoBehaviour
         triangles[10] = 3;
         triangles[11] = 5;
 
-        Vector2[] uvs = new Vector2[6];
         mesh.vertices = verts;
         mesh.triangles = triangles;
         mesh.uv = uvs;
+    }
 
-        mesh.RecalculateNormals();
+    private void OnTriggerEnter(Collider other)
+    {
+        ITile tile = other.GetComponent<ITile>();
+        if (tile != null)
+        {
+            tile.faction = green;
+            Debug.Log("OnTriggerEnter green");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        ITile tile = other.GetComponent<ITile>();
+        if (tile != null)
+        {
+            tile.faction = none;
+        }
+
     }
 }
