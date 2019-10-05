@@ -27,7 +27,14 @@ public class Tile : MonoBehaviour, ITile {
         }
     }
     private Faction factionCache;
-    public Vector2Int position { get; set; }
+    public Vector2Int position {
+        get => positionCache;
+        set {
+            positionCache = value;
+            transform.localPosition = new Vector3(position.x, 0, position.y);
+        }
+    }
+    private Vector2Int positionCache;
 
     public float happiness {
         get {
@@ -114,8 +121,8 @@ public class Tile : MonoBehaviour, ITile {
     private bool accessibleTilesDirty = true;
     public IEnumerable<ITile> accessibleTilesCache;
 
-    private void Update() {
-        transform.localPosition = new Vector3(position.x, 0, position.y);
+    private void Start() {
         GetComponent<Renderer>().material.SetColor("_BaseColor", faction.color);
+        transform.localPosition = new Vector3(position.x, 0, position.y);
     }
 }
