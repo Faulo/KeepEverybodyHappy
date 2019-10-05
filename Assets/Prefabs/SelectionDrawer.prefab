@@ -51,9 +51,68 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  changeColorSpeed: 0.05
+  changeColorHighlightAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  changeScaleAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.9016871
+      outSlope: -0.9016871
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5545161
+      value: 0.5
+      inSlope: 0.11034396
+      outSlope: 0.11034396
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.122375
+      outSlope: 1.122375
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   none: {fileID: 11400000, guid: a768477ae08739543bd081bc33a4dd54, type: 2}
   green: {fileID: 11400000, guid: d18dd990e3ccc6c4bb0a37847da7776e, type: 2}
   pink: {fileID: 11400000, guid: 7b2146744c01dc144b33cfb0ade148fd, type: 2}
+  currentFaction: {fileID: 11400000, guid: 7b2146744c01dc144b33cfb0ade148fd, type: 2}
 --- !u!33 &5222624858160474950
 MeshFilter:
   m_ObjectHideFlags: 0
