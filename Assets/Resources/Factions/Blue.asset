@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b09c0895e84694fb24023910961fa2, type: 3}
+  m_Name: Blue
+  m_EditorClassIdentifier: 
+  isActive: 1
+  tileColor: {r: 0.12842648, g: 0.7075762, b: 0.735849, a: 0}
+  dudeColor: {r: 0.06385724, g: 0.38679248, b: 0.3210251, a: 0}
+  isDefault: 0
+  isValuable: 0
+  likesHavingAccessTo:
+  - {fileID: 11400000, guid: 94a6a0236c8e32b4b99873cce0b3e5d2, type: 2}
+  likesBeingNextTo:
+  - {fileID: 11400000}
+  dislikesHavingAccessTo: []
+  dislikesBeingNextTo: []

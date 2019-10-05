@@ -26,6 +26,7 @@ public class Tile : MonoBehaviour, ITile {
             }
         }
     }
+    public bool isZoneable => !faction.isValuable;
     private Faction factionCache;
     public Dude dude { get; set; }
     public bool DudeIsFaction(Faction faction) => dude && dude.faction == faction;

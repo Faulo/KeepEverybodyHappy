@@ -158,7 +158,7 @@ public class SelectionDrawer : MonoBehaviour
         {
             if (markedTilesWithFaction.ContainsKey(tile) == false)
             {
-                if (tile.GetComponent<ITile>().faction.isValuable == false)
+                if (tile.isZoneable)
                 {
                     Material mat = other.GetComponent<MeshRenderer>().material;
                     markedTilesWithFaction.Add(tile, (tile.faction, new TileHighlight(mat, 0f, 1)));
