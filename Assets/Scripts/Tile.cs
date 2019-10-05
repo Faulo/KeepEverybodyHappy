@@ -27,6 +27,7 @@ public class Tile : MonoBehaviour, ITile {
         }
     }
     private Faction factionCache;
+    public Dude dude { get; set; }
     public Vector2Int position {
         get => positionCache;
         set {
@@ -122,7 +123,7 @@ public class Tile : MonoBehaviour, ITile {
     public IEnumerable<ITile> accessibleTilesCache;
 
     private void Start() {
-        GetComponent<Renderer>().material.SetColor("_BaseColor", faction.color);
+        GetComponent<Renderer>().material.SetColor("_BaseColor", faction.tileColor);
         transform.localPosition = new Vector3(position.x, 0, position.y);
     }
 }

@@ -10,7 +10,8 @@ public class Faction : ScriptableObject {
     public static Faction defaultFaction => activeFactions.FirstOrDefault(faction => faction.isDefault);
 
     public bool isActive = true;
-    public Color color;
+    public Color tileColor;
+    public Color dudeColor;
     public bool isDefault = false;
     public bool isValuable = false;
 

@@ -162,7 +162,7 @@ public class SelectionDrawer : MonoBehaviour
                 {
                     Material mat = other.GetComponent<MeshRenderer>().material;
                     markedTilesWithFaction.Add(tile, (tile.faction, new TileHighlight(mat, 0f, 1)));
-                    mat.SetColor("_HighlightColor", faction.color);
+                    mat.SetColor("_HighlightColor", faction.tileColor);
                     tile.faction = faction;
                 }
             }
@@ -211,7 +211,7 @@ public class SelectionDrawer : MonoBehaviour
                 if (newValue >= 1f)
                     DudeManager.instance.SpawnDudes(item.Key);
                 markedTilesWithFaction.Remove(item.Key);
-                item.Value.tileHighlight.mat.SetColor("_BaseColor", item.Key.faction.color);
+                item.Value.tileHighlight.mat.SetColor("_BaseColor", item.Key.faction.tileColor);
             }
         }
     }

@@ -36,7 +36,7 @@ public class World {
 
     public void LoadLevel(Level level) {
         foreach (var valuable in level.factions.Where(faction => faction.faction.isValuable)) {
-            for (int i = 0; i < valuable.numberOfMembers; i++) {
+            for (int i = 0; i < valuable.numberOfDudes; i++) {
                 randomEmptyTile.faction = valuable.faction;
             }
         }

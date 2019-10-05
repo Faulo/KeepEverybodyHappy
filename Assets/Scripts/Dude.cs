@@ -36,7 +36,7 @@ public class Dude : MonoBehaviour
 
     private void Spawn()
     {
-        Color color = faction.color;
+        Color color = faction.tileColor;
         color.a = 1f;
         color.r += .05f;
         color.g += .05f;

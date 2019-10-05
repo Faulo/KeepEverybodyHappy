@@ -10,7 +10,7 @@ public class DebugPanel : MonoBehaviour, IWorldObserver {
 
     private World world;
     private Level level;
-    private IEnumerable<Level.FactionInstance> factions;
+    private IEnumerable<FactionInstance> factions;
 
     public void Observe(World world, Level level) {
         this.world = world;
@@ -18,9 +18,9 @@ public class DebugPanel : MonoBehaviour, IWorldObserver {
 
         factions = Enumerable.Prepend(
             level.factions,
-            new Level.FactionInstance() {
+            new FactionInstance() {
                 faction = Faction.defaultFaction,
-                numberOfMembers = world.tiles.Count()
+                numberOfDudes = world.tiles.Count()
             }
         );
     }
@@ -34,7 +34,7 @@ public class DebugPanel : MonoBehaviour, IWorldObserver {
                     "{0} ({1}/{2}): {3}\n",
                     faction.faction.name,
                     tiles.Count(),
-                    faction.numberOfMembers,
+                    faction.numberOfDudes,
                     tiles.Sum(tile => tile.happiness)
                 );
             }

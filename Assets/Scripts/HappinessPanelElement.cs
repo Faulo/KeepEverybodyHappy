@@ -20,7 +20,7 @@ public class HappinessPanelElement : MonoBehaviour
         
     }
 
-    public void SetFaction(Level.FactionInstance faction) {
+    public void SetFaction(FactionInstance faction) {
         text.text = faction.faction.name;
     }
 }
