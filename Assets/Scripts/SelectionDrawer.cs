@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,15 +42,28 @@ public class SelectionDrawer : MonoBehaviour
 
     private Collider[] hitColliders = new Collider[100];
     [SerializeField] private LayerMask hitMask;
+    [SerializeField, Range(0.01f, 1f)] private float changeColorSpeed;
+    [SerializeField] private AnimationCurve changeColorHighlightAnimationCurve;
+    [SerializeField] private AnimationCurve changeColorRevertAnimationCurve;
 
     private Camera cam;
 
-    private Dictionary<ITile, Faction> markedTilesWithFaction = new Dictionary<ITile, Faction>();
+    private Dictionary<ITile, (Faction faction, TileHighlight tileHighlight)> markedTilesWithFaction = new Dictionary<ITile, (Faction, TileHighlight)>();
+    private List<TileHighlight> unmarkTileList;
+    private List<TileHighlight> unfinishedTileList;
 
     [Header("Factions")]
     [SerializeField] private Faction none;
     [SerializeField] private Faction green;
     [SerializeField] private Faction pink;
+
+
+    [SerializeField] private Faction currentFaction;
+    public Faction CurrentFaction
+    {
+        get => currentFaction;
+        set => currentFaction = value;
+    }
 
     private void Awake()
     {
@@ -58,11 +72,8 @@ public class SelectionDrawer : MonoBehaviour
         mesh = meshFilter.mesh;
         cam = Camera.main;
         boxCollider = GetComponent<BoxCollider>();
-    }
-
-    private void Start()
-    {
-
+        unmarkTileList = new List<TileHighlight>();
+        unfinishedTileList = new List<TileHighlight>();
     }
 
     private void Update()
@@ -76,7 +87,10 @@ public class SelectionDrawer : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             meshRenderer.enabled = false;
-            markedTilesWithFaction.Clear();
+            foreach (var item in markedTilesWithFaction)
+            {
+                item.Value.tileHighlight.unfinished = true;
+            }
         }
 
         Draw = Input.GetMouseButton(0);
@@ -88,6 +102,11 @@ public class SelectionDrawer : MonoBehaviour
             DefineSelectionArea();
             DrawSelection();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        AnimateTiles();
     }
 
     private void OnDrawGizmos()
@@ -138,7 +157,7 @@ public class SelectionDrawer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        MarkTile(other, green);
+        MarkTile(other, CurrentFaction);
     }
 
     private void OnTriggerExit(Collider other)
@@ -151,9 +170,11 @@ public class SelectionDrawer : MonoBehaviour
         if (Draw == false)
             return;
         ITile tile = other.GetComponent<ITile>();
-        if (tile != null)
+        if (tile != null && markedTilesWithFaction.ContainsKey(tile) == false)
         {
-            markedTilesWithFaction.Add(tile, tile.faction);
+            Material mat = other.GetComponent<MeshRenderer>().material;
+            markedTilesWithFaction.Add(tile, (tile.faction, new TileHighlight(mat, 0f, 1)));
+            mat.SetColor("_HighlightColor", faction.color);
             tile.faction = faction;
         }
     }
@@ -166,9 +187,44 @@ public class SelectionDrawer : MonoBehaviour
         {
             if (markedTilesWithFaction.ContainsKey(tile))
             {
-                tile.faction = markedTilesWithFaction[tile];
-                markedTilesWithFaction.Remove(tile);
+                if (markedTilesWithFaction[tile].tileHighlight.unfinished)
+                    return;
+                markedTilesWithFaction[tile].tileHighlight.unfinished = true;
+                markedTilesWithFaction[tile].tileHighlight.multiplier = -1;
+                tile.faction = markedTilesWithFaction[tile].faction;
             }
         }
+    }
+
+    private void AnimateTiles()
+    {
+        foreach (var item in markedTilesWithFaction.ToArray())
+        {
+            float oldValue = item.Value.tileHighlight.progress;
+            float newValue = Mathf.Clamp01(oldValue + (changeColorSpeed * item.Value.tileHighlight.multiplier));
+            item.Value.tileHighlight.progress = newValue;
+            float curveValue = changeColorHighlightAnimationCurve.Evaluate(newValue);
+            item.Value.tileHighlight.mat.SetFloat("_Highlight", curveValue);
+            if (item.Value.tileHighlight.unfinished && (newValue >= 1f || newValue <= 0f))
+            {
+                markedTilesWithFaction.Remove(item.Key);
+                item.Value.tileHighlight.mat.SetColor("_BaseColor", item.Key.faction.color);
+            }
+        }
+    }
+}
+
+public class TileHighlight
+{
+    public Material mat;
+    public float progress;
+    public float multiplier;
+    public bool unfinished;
+
+    public TileHighlight(Material mat, float progress, float multiplier)
+    {
+        this.mat = mat;
+        this.progress = progress;
+        this.multiplier = multiplier;
     }
 }
