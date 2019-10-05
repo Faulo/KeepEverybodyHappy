@@ -8,13 +8,17 @@ public class HappinessManager : MonoBehaviour, IWorldObserver {
     private DudeManager dudeManager = default;
     private World world;
     private Level level;
+    private FactionInstance[] dudeFactions;
     public void Observe(World world, Level level) {
         this.world = world;
         this.level = level;
+        dudeFactions = level.factionInstances
+            .Where(factionInstance => factionInstance.faction.isDudes)
+            .ToArray();
     }
     void Update() {
         if (world != null && level != null) {
-            foreach (var factionInstance in level.factionInstances) {
+            foreach (var factionInstance in dudeFactions) {
                 var faction = factionInstance.faction;
                 var factionTiles = world.tiles
                     .Where(tile => tile.faction == faction)
