@@ -24,7 +24,9 @@ public class Dude : MonoBehaviour
 
     [Header("Swaying Animation")]
     [SerializeField] private float swayingSpeed;
-    [SerializeField] private float swayingAnimCurve;
+    [SerializeField] private float swayingIntensity;
+    [SerializeField] private AnimationCurve swayingAnimCurvePosition;
+    [SerializeField] private AnimationCurve swayingAnimCurveRotation;
 
     private void Awake()
     {
@@ -35,7 +37,7 @@ public class Dude : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         Spawn();
-        //StartCoroutine(HappySwayingRoutine());
+        StartCoroutine(HappySwayingRoutine());
     }
 
     void Update()
@@ -63,21 +65,38 @@ public class Dude : MonoBehaviour
     public void Despawn()
     {
         //animateInCoroutine = StartCoroutine(AnimationUtility.ScaleGameObjectRoutine(transform, Vector3.zero, animateOutDuration, animateOutCurve));
+        //    StartCoroutine(DespawnRoutine());
+      //  StartCoroutine(AnimationUtility.ScaleGameObjectRoutine(transform, Vector3.zero, animateInDuration));
+    }
+
+    private IEnumerator DespawnRoutine()
+    {
+        int steps = Mathf.RoundToInt(animateOutDuration / Time.fixedDeltaTime);
+        if (steps < 2)
+            steps = 2;
+        float progress = 0f;
+        Vector3 startScale = transform.localScale;
+        for (int i = 0; i < steps; i++)
+        {
+            progress = AnimationUtility.Remap(i, 0, steps - 1, 0f, 1f);
+            transform.localScale = Vector3.Lerp(startScale, Vector3.zero, animateOutCurve == null ? progress : animateOutCurve.Evaluate(progress));
+            yield return new WaitForFixedUpdate();
+        }
+        Destroy(gameObject);
     }
 
     private IEnumerator HappySwayingRoutine()
     {
         float progress = 0f;
-        Vector2 basePos = transform.localPosition - new Vector3(0.15f, 0f, 0f);
-        Vector2 targetPos = transform.localPosition + new Vector3(0.15f, 0f, 0f);
-        Quaternion baseRot = Quaternion.Euler(0f, 0f, -7f);
-        Quaternion targetRot = Quaternion.Euler(0f, 0f, 7f);
+        Vector2 startingScale = Vector2.one * baseScale;
+        Vector2 targetScale = startingScale * .75f;
+        Vector3 originalRotation = transform.localRotation.eulerAngles;
+        Quaternion baseRot = Quaternion.Euler(90f, 0f, -swayingIntensity);
+        Quaternion targetRot = Quaternion.Euler(90f, 0f, swayingIntensity);
         while (true)
         {
-            progress += swayingSpeed * Time.deltaTime;
-            if (progress >= 1f || progress <= 0f)
-                swayingSpeed *= -1f;
-            transform.localPosition = Vector3.Lerp(basePos, targetPos, progress);
+            progress = Mathf.PingPong(Time.time * swayingSpeed, 1f);
+            transform.localScale = Vector3.Lerp(startingScale, targetScale, swayingAnimCurvePosition.Evaluate(progress));
             transform.localRotation = Quaternion.Lerp(baseRot, targetRot, progress);
             yield return null;
         }
