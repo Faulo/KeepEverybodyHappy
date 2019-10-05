@@ -16,4 +16,5 @@ MonoBehaviour:
   height: 24
   tilePrefab: {fileID: 6832667397439130640, guid: 10c2eb6457d103d42810bae23964213b,
     type: 3}
-  defaultFaction: {fileID: 11400000, guid: a768477ae08739543bd081bc33a4dd54, type: 2}
+  levels:
+  - {fileID: 11400000, guid: 2532069075df3284cb93f2862004dfa3, type: 2}
