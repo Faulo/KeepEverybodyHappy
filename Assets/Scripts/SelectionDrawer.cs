@@ -5,6 +5,7 @@ using UnityEngine;
 public class SelectionDrawer : MonoBehaviour
 {
     private MeshFilter meshFilter;
+    private MeshRenderer meshRenderer;
     private Mesh mesh;
     private BoxCollider boxCollider;
 
@@ -43,6 +44,7 @@ public class SelectionDrawer : MonoBehaviour
 
     private Camera cam;
 
+    private Dictionary<ITile, Faction> markedTilesWithFaction = new Dictionary<ITile, Faction>();
 
     [Header("Factions")]
     [SerializeField] private Faction none;
@@ -52,6 +54,7 @@ public class SelectionDrawer : MonoBehaviour
     private void Awake()
     {
         meshFilter = GetComponent<MeshFilter>();
+        meshRenderer = GetComponent<MeshRenderer>();
         mesh = meshFilter.mesh;
         cam = Camera.main;
         boxCollider = GetComponent<BoxCollider>();
@@ -68,6 +71,12 @@ public class SelectionDrawer : MonoBehaviour
         {
             drawStartPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             drawStartPoint.z = ZPOSITION;
+            meshRenderer.enabled = true;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            meshRenderer.enabled = false;
+            markedTilesWithFaction.Clear();
         }
 
         Draw = Input.GetMouseButton(0);
@@ -129,21 +138,37 @@ public class SelectionDrawer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        ITile tile = other.GetComponent<ITile>();
-        if (tile != null)
-        {
-            tile.faction = green;
-            Debug.Log("OnTriggerEnter green");
-        }
+        MarkTile(other, green);
     }
 
     private void OnTriggerExit(Collider other)
     {
+        RevertMarking(other);
+    }
+
+    private void MarkTile(Collider other, Faction faction)
+    {
+        if (Draw == false)
+            return;
         ITile tile = other.GetComponent<ITile>();
         if (tile != null)
         {
-            tile.faction = none;
+            markedTilesWithFaction.Add(tile, tile.faction);
+            tile.faction = faction;
         }
-
+    }
+    private void RevertMarking(Collider other)
+    {
+        if (Draw == false)
+            return;
+        ITile tile = other.GetComponent<ITile>();
+        if (tile != null)
+        {
+            if (markedTilesWithFaction.ContainsKey(tile))
+            {
+                tile.faction = markedTilesWithFaction[tile];
+                markedTilesWithFaction.Remove(tile);
+            }
+        }
     }
 }
