@@ -18,6 +18,14 @@ public class Dude : MonoBehaviour
 
     private float baseScale;
 
+    [SerializeField] private Sprite mouthSad;
+    [SerializeField] private Sprite mouthNeutral;
+    [SerializeField] private Sprite mouthHappy;
+
+    [Header("Swaying Animation")]
+    [SerializeField] private float swayingSpeed;
+    [SerializeField] private float swayingAnimCurve;
+
     private void Awake()
     {
         baseScale = transform.localScale.x;
@@ -27,6 +35,7 @@ public class Dude : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         Spawn();
+        //StartCoroutine(HappySwayingRoutine());
     }
 
     void Update()
@@ -54,6 +63,24 @@ public class Dude : MonoBehaviour
     public void Despawn()
     {
         //animateInCoroutine = StartCoroutine(AnimationUtility.ScaleGameObjectRoutine(transform, Vector3.zero, animateOutDuration, animateOutCurve));
+    }
+
+    private IEnumerator HappySwayingRoutine()
+    {
+        float progress = 0f;
+        Vector2 basePos = transform.localPosition - new Vector3(0.15f, 0f, 0f);
+        Vector2 targetPos = transform.localPosition + new Vector3(0.15f, 0f, 0f);
+        Quaternion baseRot = Quaternion.Euler(0f, 0f, -7f);
+        Quaternion targetRot = Quaternion.Euler(0f, 0f, 7f);
+        while (true)
+        {
+            progress += swayingSpeed * Time.deltaTime;
+            if (progress >= 1f || progress <= 0f)
+                swayingSpeed *= -1f;
+            transform.localPosition = Vector3.Lerp(basePos, targetPos, progress);
+            transform.localRotation = Quaternion.Lerp(baseRot, targetRot, progress);
+            yield return null;
+        }
     }
 }
 
