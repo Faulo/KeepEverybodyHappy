@@ -17,7 +17,10 @@ MonoBehaviour:
   dudeColor: {r: 0.8189759, g: 0, b: 0.9056604, a: 0}
   isDefault: 0
   isValuable: 0
-  likesHavingAccessTo: []
-  likesBeingNextTo: []
+  likesHavingAccessTo:
+  - {fileID: 11400000, guid: 94a6a0236c8e32b4b99873cce0b3e5d2, type: 2}
+  likesBeingNextTo:
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: d18dd990e3ccc6c4bb0a37847da7776e, type: 2}
   dislikesHavingAccessTo: []
   dislikesBeingNextTo: []

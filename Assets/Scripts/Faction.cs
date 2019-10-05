@@ -14,6 +14,7 @@ public class Faction : ScriptableObject {
     public Color dudeColor;
     public bool isDefault = false;
     public bool isValuable = false;
+    public bool isDudes => !(isDefault || isValuable);
 
     [Header("Happiness Algorithm")]
     public Faction[] likesHavingAccessTo;
