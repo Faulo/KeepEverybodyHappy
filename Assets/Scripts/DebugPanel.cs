@@ -4,7 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-public class FactionPanel : MonoBehaviour {
+public class DebugPanel : MonoBehaviour, IWorldObserver {
     [SerializeField]
     private TextMeshProUGUI text = default;
 
