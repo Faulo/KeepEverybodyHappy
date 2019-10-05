@@ -46,24 +46,16 @@ public class Tile : MonoBehaviour, ITile {
                 if (!faction.isDefault) {
                     happinessCache++;
                     foreach (var f in faction.likesBeingNextTo) {
-                        if (neighboringTiles.Any(tile => tile.faction == f)) {
-                            happinessCache++;
-                        }
+                        happinessCache += neighboringTiles.Count(tile => tile.faction == f);
                     }
                     foreach (var f in faction.dislikesBeingNextTo) {
-                        if (neighboringTiles.Any(tile => tile.faction == f)) {
-                            happinessCache--;
-                        }
+                        happinessCache -= neighboringTiles.Count(tile => tile.faction == f);
                     }
                     foreach (var f in faction.likesHavingAccessTo) {
-                        if (accessibleTiles.Any(tile => tile.faction == f)) {
-                            happinessCache++;
-                        }
+                        happinessCache += accessibleTiles.Count(tile => tile.faction == f);
                     }
                     foreach (var f in faction.dislikesHavingAccessTo) {
-                        if (accessibleTiles.Any(tile => tile.faction == f)) {
-                            happinessCache--;
-                        }
+                        happinessCache -= accessibleTiles.Count(tile => tile.faction == f);
                     }
                 }
             }
