@@ -12,4 +12,11 @@ public class Faction : ScriptableObject {
     public bool isActive = true;
     public Color color;
     public bool isDefault = false;
+    public bool isValuable = false;
+
+    [Header("Happiness Algorithm")]
+    public Faction[] likesHavingAccessTo;
+    public Faction[] likesBeingNextTo;
+    public Faction[] dislikesHavingAccessTo;
+    public Faction[] dislikesBeingNextTo;
 }

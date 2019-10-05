@@ -27,11 +27,13 @@ public class FactionPanel : MonoBehaviour {
                 }
             );
             foreach (var faction in factions) {
+                var tiles = world.tiles.Where(tile => tile.faction == faction.faction);
                 text.text += string.Format(
-                    "{0}: {1}/{2}\n",
+                    "{0} ({1}/{2}): {3}\n",
                     faction.faction.name,
-                    world.tiles.Count(tile => tile.faction == faction.faction),
-                    faction.numberOfMembers
+                    tiles.Count(),
+                    faction.numberOfMembers,
+                    tiles.Sum(tile => tile.happiness)
                 );
             }
         }

@@ -17,3 +17,5 @@ MonoBehaviour:
     numberOfMembers: 75
   - faction: {fileID: 11400000, guid: 7b2146744c01dc144b33cfb0ade148fd, type: 2}
     numberOfMembers: 25
+  - faction: {fileID: 11400000, guid: b4349fe0f851abd498a95b3e166301ac, type: 2}
+    numberOfMembers: 5
