@@ -49,14 +49,6 @@ public class SelectionDrawer : MonoBehaviour
     private Camera cam;
 
     private Dictionary<Tile, (Faction faction, TileHighlight tileHighlight)> markedTilesWithFaction = new Dictionary<Tile, (Faction, TileHighlight)>();
-    private List<TileHighlight> unmarkTileList;
-    private List<TileHighlight> unfinishedTileList;
-
-    [Header("Factions")]
-    [SerializeField] private Faction none;
-    [SerializeField] private Faction green;
-    [SerializeField] private Faction pink;
-
 
     [SerializeField] private Faction currentFaction;
     public Faction CurrentFaction
@@ -72,8 +64,6 @@ public class SelectionDrawer : MonoBehaviour
         mesh = meshFilter.mesh;
         cam = Camera.main;
         boxCollider = GetComponent<BoxCollider>();
-        unmarkTileList = new List<TileHighlight>();
-        unfinishedTileList = new List<TileHighlight>();
     }
 
     private void Update()
@@ -108,12 +98,6 @@ public class SelectionDrawer : MonoBehaviour
     {
         AnimateTiles();
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireCube(SelectionCenter, SelectionSize);
-    //}
 
     private void DefineSelectionArea()
     {
@@ -174,18 +158,18 @@ public class SelectionDrawer : MonoBehaviour
         {
             if (markedTilesWithFaction.ContainsKey(tile) == false)
             {
-                Material mat = other.GetComponent<MeshRenderer>().material;
-                markedTilesWithFaction.Add(tile, (tile.faction, new TileHighlight(mat, 0f, 1)));
-                mat.SetColor("_HighlightColor", faction.color);
-                tile.faction = faction;
+                if (tile.GetComponent<ITile>().faction.isValuable == false)
+                {
+                    Material mat = other.GetComponent<MeshRenderer>().material;
+                    markedTilesWithFaction.Add(tile, (tile.faction, new TileHighlight(mat, 0f, 1)));
+                    mat.SetColor("_HighlightColor", faction.color);
+                    tile.faction = faction;
+                }
             }
             else
             {
                 markedTilesWithFaction[tile] = (markedTilesWithFaction[tile].faction, new TileHighlight(other.GetComponent<MeshRenderer>().material, 0f, 1));
                 tile.faction = faction;
-                //markedTilesWithFaction[tile].tileHighlight.progress = 0f;
-                //markedTilesWithFaction[tile].tileHighlight.unfinished = false;
-                //markedTilesWithFaction[tile].tileHighlight.mat.SetColor("_HighlightColor", faction.color);
             }
         }
     }
@@ -213,16 +197,18 @@ public class SelectionDrawer : MonoBehaviour
         {
             float oldValue = item.Value.tileHighlight.progress;
             float newValue = Mathf.Clamp01(oldValue + (changeColorSpeed * item.Value.tileHighlight.multiplier));
+            float newValueScale = Mathf.Clamp01(oldValue + (changeColorSpeed * 5f * item.Value.tileHighlight.multiplier));
             item.Value.tileHighlight.progress = newValue;
 
             float curveValueColor = changeColorHighlightAnimationCurve.Evaluate(newValue);
-            float curveValueScale = changeScaleAnimationCurve.Evaluate(newValue);
+            float curveValueScale = changeScaleAnimationCurve.Evaluate(newValueScale);
 
             item.Value.tileHighlight.mat.SetFloat("_Highlight", curveValueColor);
             item.Key.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, curveValueScale);
 
             if (item.Value.tileHighlight.unfinished && (newValue >= 1f || newValue <= 0f))
             {
+                DudeManager.instance.SpawnDudes(item.Key);
                 markedTilesWithFaction.Remove(item.Key);
                 item.Value.tileHighlight.mat.SetColor("_BaseColor", item.Key.faction.color);
             }
