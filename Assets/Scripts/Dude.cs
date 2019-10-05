@@ -44,7 +44,7 @@ public class Dude : MonoBehaviour
         spriteRenderer.color = color;
         transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
         var localPos = transform.localPosition;
-        localPos.y = -1f;
+        localPos.y = 1f;
         transform.localPosition = localPos;
         transform.localScale = Vector3.zero;
         animateInDuration += UnityEngine.Random.Range(-animateInDuration / 2f, animateInDuration / 2f);
