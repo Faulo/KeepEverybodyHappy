@@ -15,7 +15,7 @@ public class HappinessPanel : MonoBehaviour, IWorldObserver {
         foreach (Transform child in transform) {
             Destroy(child.gameObject);
         }
-        level.factions
+        level.factionInstances
             .Where(faction => !faction.faction.isValuable)
             .ForAll(faction => {
                 Instantiate(elementPrefab, transform).SetFaction(faction);

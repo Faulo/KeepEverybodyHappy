@@ -4,5 +4,5 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Level", menuName = "Gameplay/Level", order = 3)]
 public class Level : ScriptableObject {
-    public FactionInstance[] factions;
+    public FactionInstance[] factionInstances;
 }

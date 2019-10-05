@@ -17,7 +17,7 @@ public class DebugPanel : MonoBehaviour, IWorldObserver {
         this.level = level;
 
         factions = Enumerable.Prepend(
-            level.factions,
+            level.factionInstances,
             new FactionInstance() {
                 faction = Faction.defaultFaction,
                 numberOfDudes = world.tiles.Count()
