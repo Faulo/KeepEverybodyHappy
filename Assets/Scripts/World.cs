@@ -1,4 +1,5 @@
 ﻿using Slothsoft.UnityExtensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,40 +9,38 @@ public class World {
     private WorldSettings settings;
     private Transform tileRoot;
     private ITile[,] map;
+    public Action<World, Level> onLevelLoad;
 
     public World(WorldSettings settings, Transform tileRoot) {
         this.settings = settings;
         this.tileRoot = tileRoot;
         Setup();
-        LoadLevel(this.settings.levels[0]);
     }
 
     private void Setup() {
         map = new ITile[settings.width, settings.height];
-        tileRoot.position += new Vector3(- settings.width / 2, settings.height / 2, 0);
+        tileRoot.position -= new Vector3(settings.width / 2, 0, settings.height / 2);
         for (int x = 0; x < settings.width; x++) {
             for (int y = 0; y < settings.height; y++) {
-                var tileObject = Object.Instantiate(settings.tilePrefab, tileRoot);
-                
+                var tileObject = UnityEngine.Object.Instantiate(settings.tilePrefab, tileRoot);
+
                 var tile = tileObject.GetComponent<ITile>();
                 tile.ownerWorld = this;
                 tile.faction = Faction.defaultFaction;
                 tile.position = new Vector2Int(x, y);
 
-                map[x,y] = tile;
+                map[x, y] = tile;
             }
         }
     }
 
-    private void LoadLevel(Level level) {
+    public void LoadLevel(Level level) {
         foreach (var valuable in level.factions.Where(faction => faction.faction.isValuable)) {
             for (int i = 0; i < valuable.numberOfMembers; i++) {
                 randomEmptyTile.faction = valuable.faction;
             }
         }
-
-        Object.FindObjectsOfType<FactionPanel>()
-            .ForAll(panel => panel.Observe(this, level));
+        onLevelLoad?.Invoke(this, level);
     }
 
     public ITile TileAt(int x, int y) {
