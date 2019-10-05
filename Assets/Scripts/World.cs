@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Slothsoft.UnityExtensions;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ public class World {
                 tileObject.transform.localPosition = new Vector3(x - settings.width / 2, 0, y - settings.height / 2);
 
                 var tile = tileObject.GetComponent<ITile>();
-                tile.faction = settings.defaultFaction;
+                tile.faction = Faction.activeFactions.RandomElement();
 
                 map[x][y] = tile;
             }

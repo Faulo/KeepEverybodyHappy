@@ -7,5 +7,4 @@ public class WorldSettings : ScriptableObject {
     public int width;
     public int height;
     public GameObject tilePrefab;
-    public Faction defaultFaction;
 }
