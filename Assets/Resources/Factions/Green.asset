@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Green
   m_EditorClassIdentifier: 
   isActive: 1
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 0, g: 0.7924528, b: 0.13326073, a: 0}
   isDefault: 0

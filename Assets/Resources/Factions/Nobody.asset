@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b09c0895e84694fb24023910961fa2, type: 3}
   m_Name: Nobody
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
+  isActive: 1
+  color: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0}
+  isDefault: 1
