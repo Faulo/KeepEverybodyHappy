@@ -45,7 +45,7 @@ public class World {
     }
 
     public ITile TileAt(int x, int y) {
-        return (x < 0 || x >= settings.width || y < 0 || y > settings.height)
+        return (x < 0 || x >= settings.width || y < 0 || y >= settings.height)
             ? default
             : map[x, y];
     }
