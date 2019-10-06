@@ -58,6 +58,10 @@ public class FactionInstance {
         numberOfDudes = startingDudes;
         globalHappiness = startingHappiness;
     }
+    public void Add(FactionInstance other) {
+        numberOfDudes += other.startingDudes;
+        globalHappiness += other.startingHappiness;
+    }
 
     private bool deltaHappinessDirty = true;
     private float deltaHappinessCache;

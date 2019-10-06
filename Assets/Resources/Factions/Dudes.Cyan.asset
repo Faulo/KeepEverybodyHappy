@@ -20,7 +20,8 @@ MonoBehaviour:
   homelessUnhappiness: -8
   likesHavingAccessTo:
   - {fileID: 11400000, guid: 94a6a0236c8e32b4b99873cce0b3e5d2, type: 2}
-  - {fileID: 11400000, guid: b4349fe0f851abd498a95b3e166301ac, type: 2}
+  - {fileID: 11400000, guid: f9161cd97af0ada48a65673c3a343322, type: 2}
+  - {fileID: 11400000, guid: c4e8b7849b1623947a0b11edb1ada3eb, type: 2}
   likesBeingNextTo:
   - {fileID: 11400000}
   dislikesHavingAccessTo:

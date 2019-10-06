@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b09c0895e84694fb24023910961fa2, type: 3}
   m_Name: Valuable.Purple
   m_EditorClassIdentifier: 
-  description: Something purple
-  tileColor: {r: 1.9018854, g: 0.6397251, b: 3.3023646, a: 1}
+  description: Purple stuff
+  tileColor: {r: 1.3658996, g: 0.6397251, b: 3.3023646, a: 1}
   isDefault: 0
   isValuable: 1
   dudeColor: {r: 0, g: 0, b: 0, a: 1}

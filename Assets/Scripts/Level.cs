@@ -27,7 +27,7 @@ public class Level : ScriptableObject {
     private void MergeWith(FactionInstance[] newInstances) {
         foreach (var newInstance in newInstances) {
             if (factionInstancesDicionary.ContainsKey(newInstance.faction)) {
-                factionInstancesDicionary[newInstance.faction].numberOfDudes += newInstance.numberOfDudes;
+                factionInstancesDicionary[newInstance.faction].Add(newInstance);
             } else {
                 factionInstancesDicionary[newInstance.faction] = newInstance;
                 factionInstancesDicionary[newInstance.faction].Init(World.instance);

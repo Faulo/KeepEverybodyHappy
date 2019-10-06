@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Valuable.Yellow
   m_EditorClassIdentifier: 
   description: "Fl\xF6nk"
-  tileColor: {r: 3.5082245, g: 3.0389717, b: 0.37987146, a: 1}
+  tileColor: {r: 3.508225, g: 0.3857211, b: 0.45919177, a: 1}
   isDefault: 0
   isValuable: 1
   dudeColor: {r: 0, g: 0, b: 0, a: 1}
