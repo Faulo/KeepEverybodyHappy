@@ -17,7 +17,7 @@ MonoBehaviour:
     - faction: {fileID: 11400000, guid: d18dd990e3ccc6c4bb0a37847da7776e, type: 2}
       startingDudes: 500
       startingHappiness: 0
-    - faction: {fileID: 11400000, guid: b4349fe0f851abd498a95b3e166301ac, type: 2}
+    - faction: {fileID: 11400000, guid: c4e8b7849b1623947a0b11edb1ada3eb, type: 2}
       startingDudes: 1
       startingHappiness: 0
   - factionInstances:
