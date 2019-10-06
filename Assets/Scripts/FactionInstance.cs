@@ -10,4 +10,6 @@ public class FactionInstance {
             .Where(tile => tile.DudeIsFaction(faction))
             .Sum(tile => tile.happiness);
     }
+    public float globalHappiness { get => 5.0f; }
+    public float deltaHappiness { get => 0.5f; }
 }
