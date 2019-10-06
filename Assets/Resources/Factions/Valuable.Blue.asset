@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05b09c0895e84694fb24023910961fa2, type: 3}
-  m_Name: Valuable.Park
+  m_Name: Valuable.Blue
   m_EditorClassIdentifier: 
-  description: Parks
-  tileColor: {r: 0, g: 4.9245777, b: 0.5793621, a: 1}
+  description: Breathable air
+  tileColor: {r: 0, g: 0.4136948, b: 6.2054214, a: 1}
   isDefault: 0
   isValuable: 1
   dudeColor: {r: 0, g: 0, b: 0, a: 1}
@@ -22,3 +22,4 @@ MonoBehaviour:
   likesBeingNextTo: []
   dislikesHavingAccessTo: []
   dislikesBeingNextTo: []
+  cursor_texture: {fileID: 0}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b09c0895e84694fb24023910961fa2, type: 3}
   m_Name: Dudes.Pink
   m_EditorClassIdentifier: 
-  description: Pink
+  description: Pink Peeps
   tileColor: {r: 0.6745098, g: 0.31764707, b: 0.9098039, a: 1}
   isDefault: 0
   isValuable: 0
@@ -20,10 +20,10 @@ MonoBehaviour:
   homelessUnhappiness: -8
   likesHavingAccessTo:
   - {fileID: 11400000, guid: 94a6a0236c8e32b4b99873cce0b3e5d2, type: 2}
+  - {fileID: 11400000, guid: f9161cd97af0ada48a65673c3a343322, type: 2}
   likesBeingNextTo:
-  - {fileID: 11400000}
   - {fileID: 11400000, guid: d18dd990e3ccc6c4bb0a37847da7776e, type: 2}
   dislikesHavingAccessTo: []
   dislikesBeingNextTo:
-  - {fileID: 11400000, guid: 43370dd3edaadee49bd9ad0f4d892ade, type: 2}
+  - {fileID: 11400000}
   cursor_texture: {fileID: 2800000, guid: 7c93c31e1cb59364888865bca7075a99, type: 3}

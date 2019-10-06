@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b09c0895e84694fb24023910961fa2, type: 3}
   m_Name: Nobody
   m_EditorClassIdentifier: 
-  description: ??
+  description: Nobody
   tileColor: {r: 0, g: 0, b: 0, a: 1}
   isDefault: 1
   isValuable: 0

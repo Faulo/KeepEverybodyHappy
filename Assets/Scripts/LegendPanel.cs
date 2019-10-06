@@ -18,6 +18,7 @@ public class LegendPanel : MonoBehaviour, IWorldObserver {
         }
         level.factionInstances
             .Select(factionInstance => factionInstance.faction)
+            .OrderBy(faction => faction.name)
             .ForAll(faction => Instantiate(elementPrefab, elementGroup.transform).text = faction.legend);
     }
 }

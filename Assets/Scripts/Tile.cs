@@ -16,6 +16,10 @@ public class Tile : MonoBehaviour, ITile
             {
                 factionCache = value;
                 ownerWorld.onTileChange?.Invoke();
+                GetComponent<Renderer>().material.SetColor("_BaseColor", faction.tileColor);
+                if (faction.isValuable) {
+                    GetComponent<Renderer>().material.SetColor("_Emission", faction.tileColor);
+                }
             }
         }
     }
@@ -162,12 +166,7 @@ public class Tile : MonoBehaviour, ITile
             neighboringTilesDirty = true;
             accessibleTilesDirty = true;
         };
-        GetComponent<Renderer>().material.SetColor("_BaseColor", faction.tileColor);
         transform.localPosition = new Vector3(position.x, 0, position.y);
 
-        if (faction.isValuable)
-        {
-              GetComponent<MeshRenderer>().material.SetColor("_Emission",faction.tileColor);
-        }
     }
 }
