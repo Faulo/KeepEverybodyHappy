@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Tile : MonoBehaviour, ITile {
+public class Tile : MonoBehaviour, ITile
+{
     public World ownerWorld { get; set; }
-    public Faction faction {
+    public Faction faction
+    {
         get => factionCache;
-        set {
-            if (factionCache != value) {
+        set
+        {
+            if (factionCache != value)
+            {
                 factionCache = value;
                 ownerWorld.onTileChange?.Invoke();
             }
@@ -17,15 +21,20 @@ public class Tile : MonoBehaviour, ITile {
     }
     public bool isZoneable => !faction.isValuable;
     private Faction factionCache;
-    public Dude dude {
+    public Dude dude
+    {
         get => dudeCache;
-        set {
-            if (dudeCache != value) {
-                if (dudeCache != null) {
+        set
+        {
+            if (dudeCache != value)
+            {
+                if (dudeCache != null)
+                {
                     dudeCache.happiness = 0;
                 }
                 dudeCache = value;
-                if (dudeCache != null) {
+                if (dudeCache != null)
+                {
                     dudeCache.happiness = happiness;
                 }
             }
@@ -33,36 +42,47 @@ public class Tile : MonoBehaviour, ITile {
     }
     public Dude dudeCache;
     public bool DudeIsFaction(Faction faction) => dude && dude.faction == faction;
-    public Vector2Int position {
+    public Vector2Int position
+    {
         get => positionCache;
-        set {
+        set
+        {
             positionCache = value;
             transform.localPosition = new Vector3(position.x, 0, position.y);
         }
     }
     private Vector2Int positionCache;
 
-    public float happiness {
-        get {
-            if (happinessDirty) {
+    public float happiness
+    {
+        get
+        {
+            if (happinessDirty)
+            {
                 happinessDirty = false;
                 happinessCache = 0;
-                if (!faction.isDefault) {
+                if (!faction.isDefault)
+                {
                     happinessCache++;
-                    foreach (var f in faction.likesBeingNextTo) {
+                    foreach (var f in faction.likesBeingNextTo)
+                    {
                         happinessCache += neighboringTiles.Count(tile => tile.faction == f);
                     }
-                    foreach (var f in faction.dislikesBeingNextTo) {
+                    foreach (var f in faction.dislikesBeingNextTo)
+                    {
                         happinessCache -= neighboringTiles.Count(tile => tile.faction == f);
                     }
-                    foreach (var f in faction.likesHavingAccessTo) {
+                    foreach (var f in faction.likesHavingAccessTo)
+                    {
                         happinessCache += accessibleTiles.Count(tile => tile.faction == f);
                     }
-                    foreach (var f in faction.dislikesHavingAccessTo) {
+                    foreach (var f in faction.dislikesHavingAccessTo)
+                    {
                         happinessCache -= accessibleTiles.Count(tile => tile.faction == f);
                     }
                 }
-                if (dude != null) {
+                if (dude != null)
+                {
                     dude.happiness = happinessCache;
                 }
             }
@@ -72,13 +92,17 @@ public class Tile : MonoBehaviour, ITile {
     private bool happinessDirty = true;
     private float happinessCache;
 
-    public IEnumerable<ITile> neighboringTiles {
-        set {
+    public IEnumerable<ITile> neighboringTiles
+    {
+        set
+        {
             neighboringTilesDirty = false;
             neighboringTilesCache = value;
         }
-        get {
-            if (neighboringTilesDirty) {
+        get
+        {
+            if (neighboringTilesDirty)
+            {
                 var offsets = new Vector2Int[] {
                     new Vector2Int(-1, 0),
                     new Vector2Int(1, 0),
@@ -96,20 +120,27 @@ public class Tile : MonoBehaviour, ITile {
     private bool neighboringTilesDirty = true;
     public IEnumerable<ITile> neighboringTilesCache;
 
-    public IEnumerable<ITile> accessibleTiles {
-        set {
+    public IEnumerable<ITile> accessibleTiles
+    {
+        set
+        {
             accessibleTilesDirty = false;
             accessibleTilesCache = value;
         }
-        get {
-            if (accessibleTilesDirty) {
+        get
+        {
+            if (accessibleTilesDirty)
+            {
                 Queue<ITile> uncheckedTiles = new Queue<ITile>(neighboringTiles);
                 ISet<ITile> checkedTiles = new HashSet<ITile>();
 
-                while (uncheckedTiles.Count > 0) {
+                while (uncheckedTiles.Count > 0)
+                {
                     var tile = uncheckedTiles.Dequeue();
-                    if (checkedTiles.Add(tile)) {
-                        if (faction == tile.faction) {
+                    if (checkedTiles.Add(tile))
+                    {
+                        if (faction == tile.faction)
+                        {
                             tile.accessibleTiles = checkedTiles;
                             tile.neighboringTiles.ForAll(t => uncheckedTiles.Enqueue(t));
                         }
@@ -123,13 +154,20 @@ public class Tile : MonoBehaviour, ITile {
     private bool accessibleTilesDirty = true;
     public IEnumerable<ITile> accessibleTilesCache;
 
-    private void Start() {
-        ownerWorld.onTileChange += () => {
+    private void Start()
+    {
+        ownerWorld.onTileChange += () =>
+        {
             happinessDirty = true;
             neighboringTilesDirty = true;
             accessibleTilesDirty = true;
         };
         GetComponent<Renderer>().material.SetColor("_BaseColor", faction.tileColor);
         transform.localPosition = new Vector3(position.x, 0, position.y);
+
+        if (faction.isValuable)
+        {
+              GetComponent<MeshRenderer>().material.SetColor("_Emission",faction.tileColor);
+        }
     }
 }

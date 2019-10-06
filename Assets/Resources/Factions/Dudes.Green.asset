@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dudes.Green
   m_EditorClassIdentifier: 
   description: Green
-  tileColor: {r: 0.13573885, g: 1, b: 0, a: 1}
+  tileColor: {r: 0.31764707, g: 0.9098039, b: 0.49803922, a: 1}
   isDefault: 0
   isValuable: 0
   dudeColor: {r: 0.089523785, g: 0.745283, b: 0, a: 1}

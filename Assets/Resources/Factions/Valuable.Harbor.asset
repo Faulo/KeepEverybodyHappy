@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Valuable.Harbor
   m_EditorClassIdentifier: 
   description: Harbor
-  tileColor: {r: 0.1328793, g: 0.12953897, b: 0.6698113, a: 1}
+  tileColor: {r: 0.65661037, g: 0.63729835, b: 3.3023639, a: 1}
   isDefault: 0
   isValuable: 1
   dudeColor: {r: 0, g: 0, b: 0, a: 1}

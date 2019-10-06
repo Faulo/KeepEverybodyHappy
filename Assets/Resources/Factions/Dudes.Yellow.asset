@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dudes.Yellow
   m_EditorClassIdentifier: 
   description: Upper Class
-  tileColor: {r: 1, g: 0.95759493, b: 0, a: 1}
+  tileColor: {r: 1, g: 0.98039216, b: 0.38039216, a: 1}
   isDefault: 0
   isValuable: 0
   dudeColor: {r: 0.735849, g: 0.7103916, b: 0.16313633, a: 0}
