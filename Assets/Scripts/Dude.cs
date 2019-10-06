@@ -52,6 +52,7 @@ public class Dude : MonoBehaviour
 
     private void Awake()
     {
+        transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
         baseScale = transform.localScale.x;
         baseRotation = transform.rotation;
     }
@@ -77,7 +78,6 @@ public class Dude : MonoBehaviour
         color.g += .05f;
         color.b += .05f;
         spriteRenderer.color = color;
-        transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
         var localPos = transform.localPosition;
         localPos.y = 1f;
         transform.localPosition = localPos;
