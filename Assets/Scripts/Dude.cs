@@ -14,8 +14,9 @@ public class Dude : MonoBehaviour
     [SerializeField] private float animateOutDuration;
     [SerializeField] private AnimationCurve animateOutCurve;
 
-    private Coroutine animateInCoroutine;
-    private Coroutine animateOutCoroutine;
+    private Coroutine happienessCoroutine;
+    private Coroutine despawnCoroutine;
+    public bool Despawning => despawnCoroutine != null;
 
     private float baseScale;
 
@@ -38,7 +39,7 @@ public class Dude : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         Spawn();
-        StartCoroutine(HappySwayingRoutine());
+        happienessCoroutine = StartCoroutine(HappySwayingRoutine());
     }
 
     void Update()
@@ -60,14 +61,16 @@ public class Dude : MonoBehaviour
         transform.localPosition = localPos;
         transform.localScale = Vector3.zero;
         animateInDuration += UnityEngine.Random.Range(-animateInDuration / 2f, animateInDuration / 2f);
-        animateInCoroutine = StartCoroutine(AnimationUtility.ScaleGameObjectRoutine(transform, Vector3.one * baseScale, animateInDuration, animateInCurve));
+        StartCoroutine(AnimationUtility.ScaleGameObjectRoutine(transform, Vector3.one * baseScale, animateInDuration, animateInCurve));
     }
 
     public void Despawn()
     {
-        //animateInCoroutine = StartCoroutine(AnimationUtility.ScaleGameObjectRoutine(transform, Vector3.zero, animateOutDuration, animateOutCurve));
-        //    StartCoroutine(DespawnRoutine());
-      //  StartCoroutine(AnimationUtility.ScaleGameObjectRoutine(transform, Vector3.zero, animateInDuration));
+        if (Despawning)
+            return;
+        StopCoroutine(happienessCoroutine);
+        happienessCoroutine = null;
+        despawnCoroutine = StartCoroutine(DespawnRoutine());
     }
 
     private IEnumerator DespawnRoutine()
@@ -80,9 +83,11 @@ public class Dude : MonoBehaviour
         for (int i = 0; i < steps; i++)
         {
             progress = AnimationUtility.Remap(i, 0, steps - 1, 0f, 1f);
-            transform.localScale = Vector3.Lerp(startScale, Vector3.zero, animateOutCurve == null ? progress : animateOutCurve.Evaluate(progress));
+            transform.localScale = Vector3.Lerp(startScale, Vector3.zero, animateOutCurve.Evaluate(progress));
+           // transform.localRotation 
             yield return new WaitForFixedUpdate();
         }
+        despawnCoroutine = null;
         Destroy(gameObject);
     }
 

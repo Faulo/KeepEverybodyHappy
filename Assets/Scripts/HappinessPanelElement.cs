@@ -34,10 +34,8 @@ public class HappinessPanelElement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // happinessText.text = string.Format("Happiness:\n{0}", factionInstance.globalHappiness);
-        // happinessText.text = string.Format("Happiness:\n{0}", factionInstance.globalHappiness);
         slider.value = factionInstance.globalHappiness;
-        placedText.text = "Placed: " + "255" + "/" + factionInstance.numberOfDudes.ToString();
+        placedText.text = "Placed: " + factionInstance.numberOfResidentDudes + "/" + factionInstance.numberOfDudes.ToString();
     }
 
     public void SetFaction(FactionInstance factionInstance, World world)

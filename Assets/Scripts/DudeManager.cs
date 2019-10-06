@@ -42,7 +42,7 @@ public class DudeManager : MonoBehaviour
         foreach (var tile in tiles)
         {
             //???
-             Destroy(tile.dude.gameObject);
+            // Destroy(tile.dude.gameObject);
             tile.dude.Despawn();
             tile.dude = null;
         }
