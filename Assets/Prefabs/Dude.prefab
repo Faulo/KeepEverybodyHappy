@@ -164,18 +164,18 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -185,8 +185,65 @@ MonoBehaviour:
   mouthSad: {fileID: 21300000, guid: e162397f6f9722942ba727c5c72fb79b, type: 3}
   mouthNeutral: {fileID: 21300000, guid: ea1f2d8b56dc1e5449ac486462f8f293, type: 3}
   mouthHappy: {fileID: 21300000, guid: 19a2e50d2bbb3b244b8a7b6772a2d2cc, type: 3}
-  swayingSpeed: 0
-  swayingAnimCurve: 0
+  swayingSpeed: 2
+  swayingIntensity: 10
+  swayingAnimCurvePosition:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.810201
+      outSlope: -0.810201
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.49871957
+      value: 0.5959369
+      inSlope: -0.002069503
+      outSlope: -0.002069503
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.806062
+      outSlope: 0.806062
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  swayingAnimCurveRotation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7659618410027345581
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +393,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 12
-  m_Sprite: {fileID: 21300000, guid: ea1f2d8b56dc1e5449ac486462f8f293, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 19a2e50d2bbb3b244b8a7b6772a2d2cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

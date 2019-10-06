@@ -6,7 +6,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HappinessPanelElement : MonoBehaviour {
+public class HappinessPanelElement : MonoBehaviour
+{
     [SerializeField]
     private Button buildButton;
     [SerializeField]
@@ -16,26 +17,37 @@ public class HappinessPanelElement : MonoBehaviour {
     [SerializeField]
     private TextMeshProUGUI dislikesText;
     [SerializeField]
-    private TextMeshProUGUI happinessText;
+    private TextMeshProUGUI placedText;
+    [SerializeField]
+    private Slider slider;
+    [SerializeField]
+    private Image fillImage;
 
     private FactionInstance factionInstance;
     private World world;
     // Start is called before the first frame update
-    void Start() {
-
+    void Start()
+    {
+        fillImage.color = factionInstance.faction.tileColor;
     }
 
     // Update is called once per frame
-    void Update() {
-        happinessText.text = string.Format("Happiness:\n{0}", factionInstance.CalculateHappiness(world));
+    void Update()
+    {
+        // happinessText.text = string.Format("Happiness:\n{0}", factionInstance.globalHappiness);
+        // happinessText.text = string.Format("Happiness:\n{0}", factionInstance.globalHappiness);
+        slider.value = factionInstance.globalHappiness;
+        placedText.text = "Placed: " + "255" + "/" + factionInstance.numberOfDudes.ToString();
     }
 
-    public void SetFaction(FactionInstance factionInstance, World world) {
+    public void SetFaction(FactionInstance factionInstance, World world)
+    {
         this.factionInstance = factionInstance;
         this.world = world;
 
         buildButtonText.text = factionInstance.faction.name;
-        buildButton.onClick.AddListener(() => {
+        buildButton.onClick.AddListener(() =>
+        {
             FindObjectOfType<SelectionDrawer>().CurrentFaction = factionInstance.faction;
         });
         factionInstance.faction.likesBeingNextTo.ForAll(AddLike);
@@ -43,13 +55,15 @@ public class HappinessPanelElement : MonoBehaviour {
         factionInstance.faction.dislikesBeingNextTo.ForAll(AddDislike);
         factionInstance.faction.dislikesHavingAccessTo.ForAll(AddDislike);
     }
-    private void AddLike(Faction faction) {
+    private void AddLike(Faction faction)
+    {
         likesText.text += string.Format(
             "<color=#{0}>■</color>",
             ColorUtility.ToHtmlStringRGB(faction.tileColor)
         );
     }
-    private void AddDislike(Faction faction) {
+    private void AddDislike(Faction faction)
+    {
         dislikesText.text += string.Format(
             "<color=#{0}>■</color>",
             ColorUtility.ToHtmlStringRGB(faction.tileColor)

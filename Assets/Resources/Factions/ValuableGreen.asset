@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ValuableGreen
   m_EditorClassIdentifier: 
   isActive: 1
-  tileColor: {r: 0, g: 0.9622642, b: 0.26917285, a: 0}
-  dudeColor: {r: 0, g: 0, b: 0, a: 0}
+  tileColor: {r: 0, g: 0.9622642, b: 0.26917285, a: 1}
+  dudeColor: {r: 0, g: 0, b: 0, a: 1}
   isDefault: 0
   isValuable: 1
   likesHavingAccessTo: []
