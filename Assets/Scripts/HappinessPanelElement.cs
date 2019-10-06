@@ -7,7 +7,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HappinessPanelElement : MonoBehaviour {
+public class HappinessPanelElement : MonoBehaviour
+{
     [SerializeField]
     private Button buildButton = default;
     [SerializeField]
@@ -31,11 +32,15 @@ public class HappinessPanelElement : MonoBehaviour {
 
     private FactionInstance factionInstance;
 
-    void Start() {
+    private Vector2 cursorHitspot = new Vector2(400, 0);
+
+    void Start()
+    {
         fillImage.color = factionInstance.faction.tileColor;
     }
 
-    void Update() {
+    void Update()
+    {
         slider.value = factionInstance.globalHappiness;
         placedText.text = string.Format(
             "Placed: {0}/{1}",
@@ -50,12 +55,16 @@ public class HappinessPanelElement : MonoBehaviour {
         );
     }
 
-    public void Init(FactionInstance factionInstance, World world, Level level) {
+    public void Init(FactionInstance factionInstance, World world, Level level)
+    {
         this.factionInstance = factionInstance;
 
         buildButtonText.text = factionInstance.faction.legend;
-        buildButton.onClick.AddListener(() => {
+        buildButton.onClick.AddListener(() =>
+        {
             FindObjectOfType<SelectionDrawer>().CurrentFaction = factionInstance.faction;
+            Cursor.SetCursor(factionInstance.faction.cursor_texture, cursorHitspot, CursorMode.Auto);
+
         });
         factionInstance.faction.likesBeingNextTo
             .Union(factionInstance.faction.likesHavingAccessTo)
@@ -66,10 +75,12 @@ public class HappinessPanelElement : MonoBehaviour {
             .Where(level.factions.Contains)
             .ForAll(AddDislike);
     }
-    private void AddLike(Faction faction) {
+    private void AddLike(Faction faction)
+    {
         likesText.text += faction.icon;
     }
-    private void AddDislike(Faction faction) {
+    private void AddDislike(Faction faction)
+    {
         dislikesText.text += faction.icon;
     }
 }

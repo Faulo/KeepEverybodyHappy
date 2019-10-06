@@ -26,3 +26,4 @@ MonoBehaviour:
   dislikesHavingAccessTo: []
   dislikesBeingNextTo:
   - {fileID: 11400000, guid: 43370dd3edaadee49bd9ad0f4d892ade, type: 2}
+  cursor_texture: {fileID: 2800000, guid: 7c93c31e1cb59364888865bca7075a99, type: 3}

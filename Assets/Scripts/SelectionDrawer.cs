@@ -50,19 +50,14 @@ public class SelectionDrawer : MonoBehaviour
 
     private Dictionary<Tile, (Faction faction, TileHighlight tileHighlight)> markedTilesWithFaction = new Dictionary<Tile, (Faction, TileHighlight)>();
 
+    public Faction noneFaction;
+    private Faction realCurrentFaction;
     [SerializeField] private Faction currentFaction;
     public Faction CurrentFaction
     {
         get => currentFaction;
         set => currentFaction = value;
     }
-
-    //[SerializeField] private Texture2D cursor_none;
-    //[SerializeField] private Texture2D cursor_pink;
-    //[SerializeField] private Texture2D cursor_blue;
-    //[SerializeField] private Texture2D cursor_green;
-    //[SerializeField] private Texture2D cursor_yellow;
-    //[SerializeField] private Vector2 cursorHitspot;
 
     private void Awake()
     {
@@ -72,19 +67,19 @@ public class SelectionDrawer : MonoBehaviour
         cam = Camera.main;
         boxCollider = GetComponent<BoxCollider>();
         
-      //  Cursor.SetCursor(cursor_green, cursorHitspot, CursorMode.Auto);
     }
 
     private void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
             drawStartPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             drawStartPoint.y = YPOSITION;
             meshRenderer.enabled = true;
+            realCurrentFaction = Input.GetMouseButtonDown(0) ? CurrentFaction : noneFaction;
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
         {
             meshRenderer.enabled = false;
             foreach (var item in markedTilesWithFaction)
@@ -93,7 +88,7 @@ public class SelectionDrawer : MonoBehaviour
             }
         }
 
-        Draw = Input.GetMouseButton(0);
+        Draw = Input.GetMouseButton(0) || Input.GetMouseButton(1);
 
         if (Draw)
         {
@@ -151,7 +146,7 @@ public class SelectionDrawer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        MarkTile(other, CurrentFaction);
+        MarkTile(other, realCurrentFaction);
     }
 
     private void OnTriggerExit(Collider other)
