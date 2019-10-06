@@ -5,6 +5,7 @@ using UnityEngine;
 public class Dude : MonoBehaviour
 {
     public Faction faction;
+    public float happiness;
 
     private SpriteRenderer spriteRenderer;
 

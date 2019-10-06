@@ -6,12 +6,15 @@ using System.Linq;
 using UnityEngine;
 
 public class World {
+    public static World instance { get; private set; }
     private WorldSettings settings;
     private Transform tileRoot;
     private ITile[,] map;
     public Action<World, Level> onLevelLoad;
+    public Action onTileChange;
 
     public World(WorldSettings settings, Transform tileRoot) {
+        instance = this;
         this.settings = settings;
         this.tileRoot = tileRoot;
         Setup();
@@ -25,9 +28,9 @@ public class World {
                 var tileObject = UnityEngine.Object.Instantiate(settings.tilePrefab, tileRoot);
 
                 var tile = tileObject.GetComponent<ITile>();
+                tile.ownerWorld = this;
                 tile.faction = Faction.defaultFaction;
                 tile.position = new Vector2Int(x, y);
-                tile.ownerWorld = this;
 
                 map[x, y] = tile;
             }

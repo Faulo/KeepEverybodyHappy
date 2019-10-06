@@ -5,13 +5,12 @@ using UnityEngine;
 public interface ITile {
     Transform transform { get; }
     World ownerWorld { get; set; }
-    bool ownerWorldHasChanged { set; }
     Faction faction { get; set; }
     Dude dude { get; set; }
     bool DudeIsFaction(Faction faction);
     bool isZoneable { get; }
     Vector2Int position { get; set; }
-    int happiness { get; }
+    float happiness { get; }
     IEnumerable<ITile> neighboringTiles { get; set; }
     IEnumerable<ITile> accessibleTiles { get; set; }
 }

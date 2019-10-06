@@ -11,6 +11,9 @@ public class Level : ScriptableObject {
     public IEnumerable<FactionInstance> factionInstances => factionInstancesDicionary.Values;
 
     private int segmentIndex { get; set; } = 0;
+    private void OnEnable() {
+        segmentIndex = 0;
+    }
     public void NextSegment() {
         if (segmentIndex < segments.Length) {
             MergeWith(segments[segmentIndex].factionInstances);
@@ -23,6 +26,7 @@ public class Level : ScriptableObject {
                 factionInstancesDicionary[newInstance.faction].numberOfDudes += newInstance.numberOfDudes;
             } else {
                 factionInstancesDicionary[newInstance.faction] = newInstance;
+                factionInstancesDicionary[newInstance.faction].ownerWorld = World.instance;
             }
         }
     }
