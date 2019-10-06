@@ -10,19 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05b09c0895e84694fb24023910961fa2, type: 3}
-  m_Name: Blue
+  m_Name: Dudes.Yellow
   m_EditorClassIdentifier: 
-  isActive: 1
-  tileColor: {r: 0.12842648, g: 0.7075762, b: 0.735849, a: 1}
-  dudeColor: {r: 0.06385724, g: 0.38679248, b: 0.3210251, a: 1}
+  description: Upper Class
+  tileColor: {r: 1, g: 0.95759493, b: 0, a: 1}
   isDefault: 0
   isValuable: 0
+  dudeColor: {r: 0.735849, g: 0.7103916, b: 0.16313633, a: 0}
   likesHavingAccessTo:
   - {fileID: 11400000, guid: 94a6a0236c8e32b4b99873cce0b3e5d2, type: 2}
   likesBeingNextTo:
   - {fileID: 11400000}
-  dislikesHavingAccessTo:
-  - {fileID: 11400000, guid: b4349fe0f851abd498a95b3e166301ac, type: 2}
-  dislikesBeingNextTo:
   - {fileID: 11400000, guid: d18dd990e3ccc6c4bb0a37847da7776e, type: 2}
-  - {fileID: 11400000, guid: 7b2146744c01dc144b33cfb0ade148fd, type: 2}
+  dislikesHavingAccessTo: []
+  dislikesBeingNextTo:
+  - {fileID: 11400000, guid: 43370dd3edaadee49bd9ad0f4d892ade, type: 2}

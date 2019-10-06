@@ -6,17 +6,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Faction", menuName = "Gameplay/Faction", order = 1)]
 public class Faction : ScriptableObject {
     private static IEnumerable<Faction> allFactions => Resources.LoadAll<Faction>("Factions");
-    public static IEnumerable<Faction> activeFactions => allFactions.Where(faction => faction.isActive);
-    public static Faction defaultFaction => activeFactions.FirstOrDefault(faction => faction.isDefault);
+    public static Faction defaultFaction => allFactions.FirstOrDefault(faction => faction.isDefault);
 
-    public bool isActive = true;
+    [Header("Basic Data")]
+    public string description = "??";
+    public string icon => string.Format("<color=#{0}>■</color>", ColorUtility.ToHtmlStringRGB(tileColor));
+    public string legend => string.Format("{0} {1}", icon, description);
+
+    [ColorUsage(true, true)]
     public Color tileColor;
-    public Color dudeColor;
     public bool isDefault = false;
     public bool isValuable = false;
     public bool isDudes => !(isDefault || isValuable);
 
-    [Header("Happiness Algorithm")]
+    [Header("Dude Data")]
+    public Color dudeColor;
     public Faction[] likesHavingAccessTo;
     public Faction[] likesBeingNextTo;
     public Faction[] dislikesHavingAccessTo;

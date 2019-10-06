@@ -44,7 +44,7 @@ public class HappinessPanelElement : MonoBehaviour
         this.factionInstance = factionInstance;
         this.world = world;
 
-        buildButtonText.text = factionInstance.faction.name;
+        buildButtonText.text = factionInstance.faction.legend;
         buildButton.onClick.AddListener(() =>
         {
             FindObjectOfType<SelectionDrawer>().CurrentFaction = factionInstance.faction;
@@ -60,16 +60,10 @@ public class HappinessPanelElement : MonoBehaviour
     }
     private void AddLike(Faction faction)
     {
-        likesText.text += string.Format(
-            "<color=#{0}>■</color>",
-            ColorUtility.ToHtmlStringRGB(faction.tileColor)
-        );
+        likesText.text += faction.icon;
     }
     private void AddDislike(Faction faction)
     {
-        dislikesText.text += string.Format(
-            "<color=#{0}>■</color>",
-            ColorUtility.ToHtmlStringRGB(faction.tileColor)
-        );
+        dislikesText.text += faction.icon;
     }
 }

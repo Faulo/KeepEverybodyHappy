@@ -608,6 +608,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2621501959018098978, guid: 9e23dd2dd97e92d419ddbe8f6871dfcb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4820894265845053954, guid: 9e23dd2dd97e92d419ddbe8f6871dfcb,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -654,6 +659,41 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7721728498951929026, guid: 9e23dd2dd97e92d419ddbe8f6871dfcb,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085118427146034271, guid: 9e23dd2dd97e92d419ddbe8f6871dfcb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659480659715449534, guid: 9e23dd2dd97e92d419ddbe8f6871dfcb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200933560506190250, guid: 9e23dd2dd97e92d419ddbe8f6871dfcb,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200933560506190250, guid: 9e23dd2dd97e92d419ddbe8f6871dfcb,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200933560506190250, guid: 9e23dd2dd97e92d419ddbe8f6871dfcb,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200933560506190250, guid: 9e23dd2dd97e92d419ddbe8f6871dfcb,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200933560506190250, guid: 9e23dd2dd97e92d419ddbe8f6871dfcb,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0

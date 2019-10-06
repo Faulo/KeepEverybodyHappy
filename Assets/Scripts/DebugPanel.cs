@@ -32,7 +32,7 @@ public class DebugPanel : MonoBehaviour, IWorldObserver {
                 var tiles = world.tiles.Where(tile => tile.DudeIsFaction(factionInstance.faction));
                 text.text += string.Format(
                     "{0} ({1}/{2}): {3}\n",
-                    factionInstance.faction.name,
+                    factionInstance.faction.description,
                     tiles.Count(),
                     factionInstance.numberOfDudes,
                     tiles.Sum(tile => tile.happiness)

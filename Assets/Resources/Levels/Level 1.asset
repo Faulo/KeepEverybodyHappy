@@ -22,7 +22,27 @@ MonoBehaviour:
       startingDudes: 1
       startingHappiness: 5
       homelessUnhappiness: -2
-  - factionInstances: []
-  - factionInstances: []
-  - factionInstances: []
+  - factionInstances:
+    - faction: {fileID: 11400000, guid: 7b2146744c01dc144b33cfb0ade148fd, type: 2}
+      startingDudes: 100
+      startingHappiness: 3
+      homelessUnhappiness: -2
+  - factionInstances:
+    - faction: {fileID: 11400000, guid: 94a6a0236c8e32b4b99873cce0b3e5d2, type: 2}
+      startingDudes: 2
+      startingHappiness: 0
+      homelessUnhappiness: 0
+    - faction: {fileID: 11400000, guid: d18dd990e3ccc6c4bb0a37847da7776e, type: 2}
+      startingDudes: 200
+      startingHappiness: 0
+      homelessUnhappiness: 0
+  - factionInstances:
+    - faction: {fileID: 11400000, guid: 7b2146744c01dc144b33cfb0ade148fd, type: 2}
+      startingDudes: 100
+      startingHappiness: 0
+      homelessUnhappiness: 0
+    - faction: {fileID: 11400000, guid: 43370dd3edaadee49bd9ad0f4d892ade, type: 2}
+      startingDudes: 300
+      startingHappiness: 0
+      homelessUnhappiness: 0
   - factionInstances: []

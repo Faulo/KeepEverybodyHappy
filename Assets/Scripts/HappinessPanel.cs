@@ -7,11 +7,7 @@ using UnityEngine;
 public class HappinessPanel : MonoBehaviour, IWorldObserver {
     [SerializeField]
     private HappinessPanelElement elementPrefab = default;
-    private World world;
-    private Level level;
     public void Observe(World world, Level level) {
-        this.world = world;
-        this.level = level;
         foreach (Transform child in transform) {
             Destroy(child.gameObject);
         }
@@ -20,8 +16,5 @@ public class HappinessPanel : MonoBehaviour, IWorldObserver {
             .ForAll(faction => {
                 Instantiate(elementPrefab, transform).Init(faction, world, level);
             });
-    }
-    void Update() {
-
     }
 }
