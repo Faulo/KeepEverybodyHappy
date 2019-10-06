@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: Nobody
   m_EditorClassIdentifier: 
   isActive: 1
-  color: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0}
+  tileColor: {r: 0, g: 0, b: 0, a: 1}
+  dudeColor: {r: 0, g: 0, b: 0, a: 1}
   isDefault: 1
+  isValuable: 0
+  likesHavingAccessTo: []
+  likesBeingNextTo: []
+  dislikesHavingAccessTo: []
+  dislikesBeingNextTo: []

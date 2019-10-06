@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Blue
   m_EditorClassIdentifier: 
   isActive: 1
-  tileColor: {r: 0.12842648, g: 0.7075762, b: 0.735849, a: 0}
-  dudeColor: {r: 0.06385724, g: 0.38679248, b: 0.3210251, a: 0}
+  tileColor: {r: 0.12842648, g: 0.7075762, b: 0.735849, a: 1}
+  dudeColor: {r: 0.06385724, g: 0.38679248, b: 0.3210251, a: 1}
   isDefault: 0
   isValuable: 0
   likesHavingAccessTo:
