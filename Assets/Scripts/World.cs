@@ -41,7 +41,7 @@ public class World {
     public void LoadLevel(Level level) {
         level.NextSegment();
         foreach (var valuable in level.factionInstances.Where(faction => faction.faction.isValuable)) {
-            for (int i = 0; i < valuable.numberOfDudes; i++) {
+            for (int i = tiles.Where(t => t.faction == valuable.faction).Count(); i < valuable.numberOfDudes; i++) {
                 randomEmptyTile.faction = valuable.faction;
             }
         }

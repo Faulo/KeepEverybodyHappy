@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,7 +39,7 @@ public class HappinessPanelElement : MonoBehaviour
         placedText.text = "Placed: " + factionInstance.numberOfResidentDudes + "/" + factionInstance.numberOfDudes.ToString();
     }
 
-    public void SetFaction(FactionInstance factionInstance, World world)
+    public void Init(FactionInstance factionInstance, World world, Level level)
     {
         this.factionInstance = factionInstance;
         this.world = world;
@@ -48,10 +49,14 @@ public class HappinessPanelElement : MonoBehaviour
         {
             FindObjectOfType<SelectionDrawer>().CurrentFaction = factionInstance.faction;
         });
-        factionInstance.faction.likesBeingNextTo.ForAll(AddLike);
-        factionInstance.faction.likesHavingAccessTo.ForAll(AddLike);
-        factionInstance.faction.dislikesBeingNextTo.ForAll(AddDislike);
-        factionInstance.faction.dislikesHavingAccessTo.ForAll(AddDislike);
+        factionInstance.faction.likesBeingNextTo
+            .Union(factionInstance.faction.likesHavingAccessTo)
+            .Where(level.factions.Contains)
+            .ForAll(AddLike);
+        factionInstance.faction.dislikesBeingNextTo
+            .Union(factionInstance.faction.dislikesHavingAccessTo)
+            .Where(level.factions.Contains)
+            .ForAll(AddDislike);
     }
     private void AddLike(Faction faction)
     {
