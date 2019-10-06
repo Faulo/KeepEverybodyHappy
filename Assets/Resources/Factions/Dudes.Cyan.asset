@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dudes.Cyan
   m_EditorClassIdentifier: 
   description: Cyan
-  tileColor: {r: 0.12842648, g: 0.7075762, b: 0.735849, a: 1}
+  tileColor: {r: 0.40392157, g: 0.7176471, b: 1, a: 1}
   isDefault: 0
   isValuable: 0
   dudeColor: {r: 0.06385724, g: 0.38679248, b: 0.3210251, a: 1}

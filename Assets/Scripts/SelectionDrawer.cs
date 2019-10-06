@@ -57,6 +57,13 @@ public class SelectionDrawer : MonoBehaviour
         set => currentFaction = value;
     }
 
+    //[SerializeField] private Texture2D cursor_none;
+    //[SerializeField] private Texture2D cursor_pink;
+    //[SerializeField] private Texture2D cursor_blue;
+    //[SerializeField] private Texture2D cursor_green;
+    //[SerializeField] private Texture2D cursor_yellow;
+    //[SerializeField] private Vector2 cursorHitspot;
+
     private void Awake()
     {
         meshFilter = GetComponent<MeshFilter>();
@@ -64,10 +71,13 @@ public class SelectionDrawer : MonoBehaviour
         mesh = meshFilter.mesh;
         cam = Camera.main;
         boxCollider = GetComponent<BoxCollider>();
+        
+      //  Cursor.SetCursor(cursor_green, cursorHitspot, CursorMode.Auto);
     }
 
     private void Update()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
             drawStartPoint = cam.ScreenToWorldPoint(Input.mousePosition);

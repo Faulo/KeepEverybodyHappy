@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Valuable.Park
   m_EditorClassIdentifier: 
   description: Parks
-  tileColor: {r: 0, g: 1, b: 0.11642933, a: 1}
+  tileColor: {r: 0, g: 4.9245777, b: 0.5793621, a: 1}
   isDefault: 0
   isValuable: 1
   dudeColor: {r: 0, g: 0, b: 0, a: 1}
