@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b09c0895e84694fb24023910961fa2, type: 3}
   m_Name: Dudes.Green
   m_EditorClassIdentifier: 
-  description: Green
+  description: Green Peeps
   tileColor: {r: 0.31764707, g: 0.9098039, b: 0.49803922, a: 1}
   isDefault: 0
   isValuable: 0
   dudeColor: {r: 0.089523785, g: 0.745283, b: 0, a: 1}
   homelessUnhappiness: -8
   likesHavingAccessTo:
-  - {fileID: 11400000, guid: b4349fe0f851abd498a95b3e166301ac, type: 2}
+  - {fileID: 11400000, guid: c4e8b7849b1623947a0b11edb1ada3eb, type: 2}
   - {fileID: 11400000, guid: 94a6a0236c8e32b4b99873cce0b3e5d2, type: 2}
   likesBeingNextTo:
   - {fileID: 11400000}

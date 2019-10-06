@@ -8,10 +8,10 @@ public class FactionInstance {
     public int numberOfDudes { get; set; }
     public int numberOfResidentDudes => ownerWorld.tiles.Where(tile => tile.DudeIsFaction(faction)).Count();
     public int numberOfHomelessDudes => numberOfDudes - numberOfResidentDudes;
-    [SerializeField, Range(1, 1000)]
+    [SerializeField, Range(1, 999)]
     public int startingDudes = 1;
-    [SerializeField, Range(0, 10)]
-    public int startingHappiness = 5;
+    [SerializeField, Range(-100, 100)]
+    public int startingHappiness = 0;
 
     public World ownerWorld {
         get => ownerWorldCache;

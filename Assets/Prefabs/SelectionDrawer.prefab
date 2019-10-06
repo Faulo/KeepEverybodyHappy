@@ -109,10 +109,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  none: {fileID: 11400000, guid: a768477ae08739543bd081bc33a4dd54, type: 2}
-  green: {fileID: 11400000, guid: d18dd990e3ccc6c4bb0a37847da7776e, type: 2}
-  pink: {fileID: 11400000, guid: 7b2146744c01dc144b33cfb0ade148fd, type: 2}
-  currentFaction: {fileID: 11400000, guid: 7b2146744c01dc144b33cfb0ade148fd, type: 2}
+  currentFaction: {fileID: 11400000, guid: d18dd990e3ccc6c4bb0a37847da7776e, type: 2}
 --- !u!33 &5222624858160474950
 MeshFilter:
   m_ObjectHideFlags: 0

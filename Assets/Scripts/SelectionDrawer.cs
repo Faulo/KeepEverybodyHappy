@@ -49,8 +49,7 @@ public class SelectionDrawer : MonoBehaviour
     private Camera cam;
 
     private Dictionary<Tile, (Faction faction, TileHighlight tileHighlight)> markedTilesWithFaction = new Dictionary<Tile, (Faction, TileHighlight)>();
-
-    public Faction noneFaction;
+    
     private Faction realCurrentFaction;
     [SerializeField] private Faction currentFaction;
     public Faction CurrentFaction
@@ -77,7 +76,7 @@ public class SelectionDrawer : MonoBehaviour
             drawStartPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             drawStartPoint.y = YPOSITION;
             meshRenderer.enabled = true;
-            realCurrentFaction = Input.GetMouseButtonDown(0) ? CurrentFaction : noneFaction;
+            realCurrentFaction = Input.GetMouseButtonDown(0) ? CurrentFaction : Faction.defaultFaction;
         }
         else if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
         {

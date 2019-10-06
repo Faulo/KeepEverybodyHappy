@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05b09c0895e84694fb24023910961fa2, type: 3}
-  m_Name: Valuable.Commerce
+  m_Name: Valuable.Green
   m_EditorClassIdentifier: 
-  description: Commerce District
-  tileColor: {r: 0, g: 2.2588236, b: 3.8431373, a: 1}
+  description: Nature or whatever
+  tileColor: {r: 0, g: 2.1657827, b: 0.33437294, a: 1}
   isDefault: 0
   isValuable: 1
   dudeColor: {r: 0, g: 0, b: 0, a: 1}
@@ -22,3 +22,4 @@ MonoBehaviour:
   likesBeingNextTo: []
   dislikesHavingAccessTo: []
   dislikesBeingNextTo: []
+  cursor_texture: {fileID: 0}
