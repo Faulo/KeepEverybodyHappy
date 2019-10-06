@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faction: {fileID: 0}
   happiness: 0
+  mouthSpriteRenderer: {fileID: 6528425203359384953}
   animateInDuration: 2
   animateInCurve:
     serializedVersion: 2
@@ -158,7 +159,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  animateOutDuration: 3
+  animateOutDuration: 1
   animateOutCurve:
     serializedVersion: 2
     m_Curve:
@@ -230,30 +231,71 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  swayingAnimCurveRotation:
+  angryStompingSpeed: 0.25
+  angryStompingIntensity: 0.25
+  angryScaleAnimCurveRotation:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
+      inSlope: 3.3250346
+      outSlope: 3.3250346
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.14439335
+      value: 0.4801129
+      inSlope: 0.8760461
+      outSlope: 0.8760461
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.39571166
+      value: 0.0848037
+      inSlope: 0.9085223
+      outSlope: 0.9085223
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.54196525
+      value: 0.58060145
+      inSlope: 1.2178572
+      outSlope: 1.2178572
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.82624847
+      value: 0.30931777
+      inSlope: 1.510421
+      outSlope: 1.510421
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
+      inSlope: 3.9751146
+      outSlope: 3.9751146
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  minHappienessForAngry: 1
+  minHappienessForNeutral: 3
+  minHappienessForHappy: 5
 --- !u!1 &7659618410027345581
 GameObject:
   m_ObjectHideFlags: 0
