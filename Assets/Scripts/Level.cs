@@ -16,6 +16,9 @@ public class Level : ScriptableObject {
         segmentIndex = 0;
     }
     public void NextSegment() {
+        if (segmentIndex > 0) {
+            factionInstances.ForAll(factionInstance => factionInstance.PassTime());
+        }
         if (segmentIndex < segments.Length) {
             MergeWith(segments[segmentIndex].factionInstances);
             segmentIndex++;

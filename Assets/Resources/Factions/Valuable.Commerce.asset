@@ -17,6 +17,7 @@ MonoBehaviour:
   isDefault: 0
   isValuable: 1
   dudeColor: {r: 0, g: 0, b: 0, a: 1}
+  homelessUnhappiness: -8
   likesHavingAccessTo: []
   likesBeingNextTo: []
   dislikesHavingAccessTo: []

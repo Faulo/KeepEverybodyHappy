@@ -12,8 +12,6 @@ public class FactionInstance {
     public int startingDudes = 1;
     [SerializeField, Range(0, 10)]
     public int startingHappiness = 5;
-    [SerializeField, Range(-10, 0)]
-    public int homelessUnhappiness = -2;
 
     public World ownerWorld {
         get => ownerWorldCache;
@@ -26,6 +24,14 @@ public class FactionInstance {
             }
         }
     }
+
+    public void PassTime() {
+        globalHappiness += deltaHappiness;
+        numberOfDudes += Mathf.RoundToInt(numberOfDudes * globalHappiness / 100);
+        numberOfDudes = Mathf.Clamp(numberOfDudes, 0, 999);
+        deltaHappinessDirty = true;
+    }
+
     private World ownerWorldCache;
 
     public float globalHappiness { get; set; }
@@ -33,11 +39,15 @@ public class FactionInstance {
         get {
             if (deltaHappinessDirty) {
                 deltaHappinessDirty = false;
-                deltaHappinessCache = ownerWorld.tiles
-                    .Where(tile => tile.DudeIsFaction(faction))
-                    .Sum(tile => tile.happiness);
-                deltaHappinessCache += homelessUnhappiness * numberOfHomelessDudes;
-                deltaHappinessCache /= numberOfDudes;
+                if (numberOfDudes > 0) {
+                    deltaHappinessCache = ownerWorld.tiles
+                        .Where(tile => tile.DudeIsFaction(faction))
+                        .Sum(tile => tile.happiness);
+                    deltaHappinessCache += faction.homelessUnhappiness * numberOfHomelessDudes;
+                    deltaHappinessCache /= numberOfDudes;
+                } else {
+                    deltaHappinessCache = 0;
+                }
             }
             return deltaHappinessCache;
         }

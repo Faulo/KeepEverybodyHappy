@@ -21,6 +21,8 @@ public class Faction : ScriptableObject {
 
     [Header("Dude Data")]
     public Color dudeColor;
+    [SerializeField, Range(-10, 0)]
+    public int homelessUnhappiness = -2;
     public Faction[] likesHavingAccessTo;
     public Faction[] likesBeingNextTo;
     public Faction[] dislikesHavingAccessTo;
