@@ -6,28 +6,32 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour, ITile {
     public World ownerWorld { get; set; }
-    public bool ownerWorldHasChanged {
-        set {
-            if (value) {
-                happinessDirty = true;
-                neighboringTilesDirty = true;
-                accessibleTilesDirty = true;
-            }
-        }
-    }
     public Faction faction {
         get => factionCache;
         set {
             if (factionCache != value) {
                 factionCache = value;
-                ownerWorld?.tiles
-                    .ForAll(tile => tile.ownerWorldHasChanged = true);
+                ownerWorld.onTileChange?.Invoke();
             }
         }
     }
     public bool isZoneable => !faction.isValuable;
     private Faction factionCache;
-    public Dude dude { get; set; }
+    public Dude dude {
+        get => dudeCache;
+        set {
+            if (dudeCache != value) {
+                if (dudeCache != null) {
+                    dudeCache.happiness = 0;
+                }
+                dudeCache = value;
+                if (dudeCache != null) {
+                    dudeCache.happiness = happiness;
+                }
+            }
+        }
+    }
+    public Dude dudeCache;
     public bool DudeIsFaction(Faction faction) => dude && dude.faction == faction;
     public Vector2Int position {
         get => positionCache;
@@ -38,7 +42,7 @@ public class Tile : MonoBehaviour, ITile {
     }
     private Vector2Int positionCache;
 
-    public int happiness {
+    public float happiness {
         get {
             if (happinessDirty) {
                 happinessDirty = false;
@@ -63,7 +67,7 @@ public class Tile : MonoBehaviour, ITile {
         }
     }
     private bool happinessDirty = true;
-    private int happinessCache;
+    private float happinessCache;
 
     public IEnumerable<ITile> neighboringTiles {
         set {
@@ -117,6 +121,11 @@ public class Tile : MonoBehaviour, ITile {
     public IEnumerable<ITile> accessibleTilesCache;
 
     private void Start() {
+        ownerWorld.onTileChange += () => {
+            happinessDirty = true;
+            neighboringTilesDirty = true;
+            accessibleTilesDirty = true;
+        };
         GetComponent<Renderer>().material.SetColor("_BaseColor", faction.tileColor);
         transform.localPosition = new Vector3(position.x, 0, position.y);
     }
