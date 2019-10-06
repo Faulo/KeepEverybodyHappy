@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class Dude : MonoBehaviour
 {
+    enum HappienessState
+    {
+        Undefined,
+        Angry,
+        Neutral,
+        Happy
+    }
     public Faction faction;
     public float happiness;
 
     private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer mouthSpriteRenderer;
 
     [SerializeField] private float animateInDuration;
     [SerializeField] private AnimationCurve animateInCurve;
@@ -19,32 +27,46 @@ public class Dude : MonoBehaviour
     public bool Despawning => despawnCoroutine != null;
 
     private float baseScale;
+    private Quaternion baseRotation;
 
     [SerializeField] private Sprite mouthSad;
     [SerializeField] private Sprite mouthNeutral;
     [SerializeField] private Sprite mouthHappy;
 
-    [Header("Swaying Animation")]
+    [Header("Happy Animation")]
     [SerializeField] private float swayingSpeed;
     [SerializeField] private float swayingIntensity;
     [SerializeField] private AnimationCurve swayingAnimCurvePosition;
-    [SerializeField] private AnimationCurve swayingAnimCurveRotation;
+
+    [Header("Angry Animation")]
+    [SerializeField] private float angryStompingSpeed;
+    [SerializeField] private float angryStompingIntensity;
+    [SerializeField] private AnimationCurve angryScaleAnimCurveRotation;
+
+    [Header("Happieness Values")]
+    [SerializeField] private float minHappienessForAngry;
+    [SerializeField] private float minHappienessForNeutral;
+    [SerializeField] private float minHappienessForHappy;
+
+    private HappienessState happienessState;
 
     private void Awake()
     {
         baseScale = transform.localScale.x;
+        baseRotation = transform.rotation;
     }
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         Spawn();
-        happienessCoroutine = StartCoroutine(HappySwayingRoutine());
+        SetHappienessState();
+        //  Debug.Log("happiness" + happiness);
     }
 
     void Update()
     {
-
+        SetHappienessState();
     }
 
     private void Spawn()
@@ -68,9 +90,62 @@ public class Dude : MonoBehaviour
     {
         if (Despawning)
             return;
-        StopCoroutine(happienessCoroutine);
-        happienessCoroutine = null;
+        if (happienessCoroutine != null)
+        {
+            StopCoroutine(happienessCoroutine);
+            happienessCoroutine = null;
+
+        }
         despawnCoroutine = StartCoroutine(DespawnRoutine());
+    }
+
+    private void SetHappienessState()
+    {
+        if (Despawning)
+            return;
+        HappienessState newState = HappienessState.Undefined;
+        // Debug.Log(happiness);
+        if (happiness <= minHappienessForAngry)
+            newState = HappienessState.Angry;
+        else if (happiness > minHappienessForAngry && happiness < minHappienessForHappy)
+            newState = HappienessState.Neutral;
+        else if (happiness >= minHappienessForHappy)
+            newState = HappienessState.Happy;
+
+        if (newState != happienessState)
+        {
+            if (happienessCoroutine != null)
+            {
+                StopCoroutine(happienessCoroutine);
+                happienessCoroutine = null;
+                ResetDudeTransform();
+            }
+            happienessState = newState;
+            switch (happienessState)
+            {
+                case HappienessState.Angry:
+                    mouthSpriteRenderer.sprite = mouthSad;
+                    happienessCoroutine = StartCoroutine(AngryStompingRoutine());
+                    break;
+                case HappienessState.Neutral:
+                    mouthSpriteRenderer.sprite = mouthNeutral;
+                    // happienessCoroutine = StartCoroutine(HappySwayingRoutine());
+                    break;
+                case HappienessState.Happy:
+                    mouthSpriteRenderer.sprite = mouthHappy;
+                    happienessCoroutine = StartCoroutine(HappySwayingRoutine());
+                    break;
+                default:
+                    Debug.LogError("SetHappienessState happienessState default");
+                    break;
+            }
+        }
+    }
+
+    private void ResetDudeTransform()
+    {
+        transform.localScale = Vector3.one * baseScale;
+        transform.localRotation = baseRotation;
     }
 
     private IEnumerator DespawnRoutine()
@@ -84,7 +159,7 @@ public class Dude : MonoBehaviour
         {
             progress = AnimationUtility.Remap(i, 0, steps - 1, 0f, 1f);
             transform.localScale = Vector3.Lerp(startScale, Vector3.zero, animateOutCurve.Evaluate(progress));
-           // transform.localRotation 
+            transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z + 15f);
             yield return new WaitForFixedUpdate();
         }
         despawnCoroutine = null;
@@ -104,6 +179,23 @@ public class Dude : MonoBehaviour
             progress = Mathf.PingPong(Time.time * swayingSpeed, 1f);
             transform.localScale = Vector3.Lerp(startingScale, targetScale, swayingAnimCurvePosition.Evaluate(progress));
             transform.localRotation = Quaternion.Lerp(baseRot, targetRot, progress);
+            yield return null;
+        }
+    }
+
+    private IEnumerator AngryStompingRoutine()
+    {
+        float progress = 0f;
+        Vector2 startingScale = Vector2.one * baseScale;
+        Vector2 targetScale = startingScale * .75f;
+        Vector3 startPos = transform.localPosition;
+        Vector3 targetPos = startPos + new Vector3(0f, 0f, angryStompingIntensity);
+        while (true)
+        {
+            progress = Mathf.PingPong(Time.time * angryStompingSpeed, 1f);
+            transform.localScale = Vector3.Lerp(startingScale, targetScale, angryScaleAnimCurveRotation.Evaluate(progress));
+            transform.localPosition = Vector3.Lerp(startPos, targetPos, angryScaleAnimCurveRotation.Evaluate(progress));
+            // transform.localRotation = Quaternion.Lerp(baseRot, targetRot, progress);
             yield return null;
         }
     }
