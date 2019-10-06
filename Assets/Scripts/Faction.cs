@@ -27,4 +27,7 @@ public class Faction : ScriptableObject {
     public Faction[] likesBeingNextTo;
     public Faction[] dislikesHavingAccessTo;
     public Faction[] dislikesBeingNextTo;
+
+    public Texture2D cursor_texture;
+
 }
