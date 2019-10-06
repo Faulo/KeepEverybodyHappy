@@ -17,6 +17,7 @@ MonoBehaviour:
   isDefault: 0
   isValuable: 0
   dudeColor: {r: 0.089523785, g: 0.745283, b: 0, a: 1}
+  homelessUnhappiness: -8
   likesHavingAccessTo:
   - {fileID: 11400000, guid: b4349fe0f851abd498a95b3e166301ac, type: 2}
   - {fileID: 11400000, guid: 94a6a0236c8e32b4b99873cce0b3e5d2, type: 2}

@@ -56,7 +56,7 @@ public class World {
     public ITile TileAt(Vector2Int position) => TileAt(position.x, position.y);
     public IEnumerable<ITile> tiles { get; private set; }
     public ITile randomEmptyTile => tiles
-        .Where(tile => tile.faction.isDefault)
+        .Where(tile => tile.isZoneable)
         .Where(tile => tile.neighboringTiles.Where(t => t.isZoneable).Count() == 4)
         .RandomElement();
 }
