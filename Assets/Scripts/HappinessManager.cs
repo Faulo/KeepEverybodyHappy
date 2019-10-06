@@ -28,7 +28,7 @@ public class HappinessManager : MonoBehaviour, IWorldObserver {
                 var otherTiles = world.tiles
                     .Except(factionTiles);
 
-                dudeManager?.SpawnDudes(factionTiles.Where(tile => !tile.DudeIsFaction(faction)));
+                dudeManager?.SpawnDudes(factionTiles.Where(tile => tile.dude == null));
                 dudeManager?.DespawnDudes(otherTiles.Where(tile => tile.DudeIsFaction(faction)));
             }
         }

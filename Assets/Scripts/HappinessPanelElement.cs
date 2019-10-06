@@ -17,6 +17,9 @@ public class HappinessPanelElement : MonoBehaviour {
     private TextMeshProUGUI dislikesText;
     [SerializeField]
     private TextMeshProUGUI happinessText;
+    [SerializeField]
+    private Slider slider;
+
 
     private FactionInstance factionInstance;
     private World world;
