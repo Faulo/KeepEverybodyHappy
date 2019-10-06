@@ -5,12 +5,15 @@ using UnityEngine;
 [Serializable]
 public class FactionInstance {
     public Faction faction;
-    [SerializeField, Range(1, 1000)]
-    public int numberOfDudes;
+    public int numberOfDudes { get; set; }
     public int numberOfResidentDudes => ownerWorld.tiles.Where(tile => tile.DudeIsFaction(faction)).Count();
     public int numberOfHomelessDudes => numberOfDudes - numberOfResidentDudes;
+    [SerializeField, Range(1, 1000)]
+    public int startingDudes = 1;
+    [SerializeField, Range(0, 10)]
+    public int startingHappiness = 5;
     [SerializeField, Range(-10, 0)]
-    private int homelessUnhappiness = -2;
+    public int homelessUnhappiness = -2;
 
     public World ownerWorld {
         get => ownerWorldCache;
@@ -39,6 +42,13 @@ public class FactionInstance {
             return deltaHappinessCache;
         }
     }
+
+    public void Init(World ownerWorld) {
+        this.ownerWorld = ownerWorld;
+        numberOfDudes = startingDudes;
+        globalHappiness = startingHappiness;
+    }
+
     private bool deltaHappinessDirty = true;
     private float deltaHappinessCache;
 }

@@ -15,9 +15,13 @@ MonoBehaviour:
   segments:
   - factionInstances:
     - faction: {fileID: 11400000, guid: d18dd990e3ccc6c4bb0a37847da7776e, type: 2}
-      numberOfDudes: 500
+      startingDudes: 500
+      startingHappiness: 5
+      homelessUnhappiness: -2
     - faction: {fileID: 11400000, guid: b4349fe0f851abd498a95b3e166301ac, type: 2}
-      numberOfDudes: 1
+      startingDudes: 1
+      startingHappiness: 5
+      homelessUnhappiness: -2
   - factionInstances: []
   - factionInstances: []
   - factionInstances: []

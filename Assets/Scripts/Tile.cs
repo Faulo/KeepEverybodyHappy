@@ -62,6 +62,9 @@ public class Tile : MonoBehaviour, ITile {
                         happinessCache -= accessibleTiles.Count(tile => tile.faction == f);
                     }
                 }
+                if (dude != null) {
+                    dude.happiness = happinessCache;
+                }
             }
             return happinessCache;
         }

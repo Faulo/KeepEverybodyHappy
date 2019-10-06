@@ -9,6 +9,7 @@ public class Level : ScriptableObject {
 
     private Dictionary<Faction, FactionInstance> factionInstancesDicionary = new Dictionary<Faction, FactionInstance>();
     public IEnumerable<FactionInstance> factionInstances => factionInstancesDicionary.Values;
+    public IEnumerable<Faction> factions => factionInstancesDicionary.Keys;
 
     private int segmentIndex { get; set; } = 0;
     private void OnEnable() {
@@ -26,7 +27,7 @@ public class Level : ScriptableObject {
                 factionInstancesDicionary[newInstance.faction].numberOfDudes += newInstance.numberOfDudes;
             } else {
                 factionInstancesDicionary[newInstance.faction] = newInstance;
-                factionInstancesDicionary[newInstance.faction].ownerWorld = World.instance;
+                factionInstancesDicionary[newInstance.faction].Init(World.instance);
             }
         }
     }

@@ -9,17 +9,18 @@ public class WorldSpawner : MonoBehaviour {
     private WorldSettings worldSettings = default;
 
     public World world { get; private set; }
-    // Start is called before the first frame update
+    public Level level { get; private set; }
+
     void Start() {
-        var world = new World(worldSettings, transform);
+        world = new World(worldSettings, transform);
+        level = worldSettings.levels[0];
         FindObjectsOfType<Transform>()
             .SelectMany(t => t.GetComponents<IWorldObserver>())
             .ForAll(observer => world.onLevelLoad += observer.Observe);
-        world.LoadLevel(worldSettings.levels[0]);
+        NextLevelSegment();
     }
 
-    // Update is called once per frame
-    void Update() {
-
+    public void NextLevelSegment() {
+        world.LoadLevel(level);
     }
 }
