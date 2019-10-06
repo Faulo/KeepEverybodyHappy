@@ -25,13 +25,14 @@ public class World {
                 var tileObject = UnityEngine.Object.Instantiate(settings.tilePrefab, tileRoot);
 
                 var tile = tileObject.GetComponent<ITile>();
-                tile.ownerWorld = this;
                 tile.faction = Faction.defaultFaction;
                 tile.position = new Vector2Int(x, y);
+                tile.ownerWorld = this;
 
                 map[x, y] = tile;
             }
         }
+        tiles = map.Cast<ITile>().Shuffle().ToArray();
     }
 
     public void LoadLevel(Level level) {
@@ -49,6 +50,9 @@ public class World {
             : map[x, y];
     }
     public ITile TileAt(Vector2Int position) => TileAt(position.x, position.y);
-    public IEnumerable<ITile> tiles => map.Cast<ITile>();
-    public ITile randomEmptyTile => tiles.Where(tile => tile.faction.isDefault).RandomElement();
+    public IEnumerable<ITile> tiles { get; private set; }
+    public ITile randomEmptyTile => tiles
+        .Where(tile => tile.faction.isDefault)
+        .Where(tile => tile.neighboringTiles.Where(t => t.isZoneable).Count() == 4)
+        .RandomElement();
 }

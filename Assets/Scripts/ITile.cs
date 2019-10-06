@@ -9,9 +9,9 @@ public interface ITile {
     Faction faction { get; set; }
     Dude dude { get; set; }
     bool DudeIsFaction(Faction faction);
+    bool isZoneable { get; }
     Vector2Int position { get; set; }
-    float happiness { get; }
+    int happiness { get; }
     IEnumerable<ITile> neighboringTiles { get; set; }
     IEnumerable<ITile> accessibleTiles { get; set; }
-
 }

@@ -20,12 +20,12 @@ public class Tile : MonoBehaviour, ITile {
         set {
             if (factionCache != value) {
                 factionCache = value;
-                ownerWorld.tiles
-                    .Where(tile => tile != default)
+                ownerWorld?.tiles
                     .ForAll(tile => tile.ownerWorldHasChanged = true);
             }
         }
     }
+    public bool isZoneable => !faction.isValuable;
     private Faction factionCache;
     public Dude dude { get; set; }
     public bool DudeIsFaction(Faction faction) => dude && dude.faction == faction;
@@ -38,7 +38,7 @@ public class Tile : MonoBehaviour, ITile {
     }
     private Vector2Int positionCache;
 
-    public float happiness {
+    public int happiness {
         get {
             if (happinessDirty) {
                 happinessDirty = false;
@@ -63,7 +63,7 @@ public class Tile : MonoBehaviour, ITile {
         }
     }
     private bool happinessDirty = true;
-    private float happinessCache;
+    private int happinessCache;
 
     public IEnumerable<ITile> neighboringTiles {
         set {

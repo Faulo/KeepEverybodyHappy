@@ -16,9 +16,9 @@ public class HappinessPanel : MonoBehaviour, IWorldObserver {
             Destroy(child.gameObject);
         }
         level.factionInstances
-            .Where(faction => !faction.faction.isValuable)
+            .Where(faction => faction.faction.isDudes)
             .ForAll(faction => {
-                Instantiate(elementPrefab, transform).SetFaction(faction);
+                Instantiate(elementPrefab, transform).SetFaction(faction, world);
             });
     }
     void Update() {
