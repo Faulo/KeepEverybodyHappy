@@ -26,8 +26,8 @@ public class FactionInstance {
     }
 
     public void PassTime() {
-        globalHappiness += deltaHappiness;
-        numberOfDudes += Mathf.RoundToInt(numberOfDudes * globalHappiness / 100);
+        //globalHappiness += deltaHappiness;
+        numberOfDudes += Mathf.RoundToInt(numberOfDudes * deltaHappiness / 100);
         numberOfDudes = Mathf.Clamp(numberOfDudes, 0, 999);
         deltaHappinessDirty = true;
     }
