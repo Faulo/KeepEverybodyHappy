@@ -111,7 +111,11 @@ public class Tile : MonoBehaviour, ITile
                     new Vector2Int(-1, 0),
                     new Vector2Int(1, 0),
                     new Vector2Int(0, -1),
-                    new Vector2Int(0, 1)
+                    new Vector2Int(0, 1),
+                    new Vector2Int(-1, -1),
+                    new Vector2Int(1, -1),
+                    new Vector2Int(-1, -1),
+                    new Vector2Int(1, 1)
                 };
                 neighboringTiles = offsets
                     .Select(offset => ownerWorld.TileAt(position + offset))

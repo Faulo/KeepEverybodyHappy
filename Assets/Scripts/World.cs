@@ -57,6 +57,6 @@ public class World {
     public IEnumerable<ITile> tiles { get; private set; }
     public ITile randomEmptyTile => tiles
         .Where(tile => tile.isZoneable)
-        .Where(tile => tile.neighboringTiles.Where(t => t.isZoneable).Count() == 4)
+        .Where(tile => tile.neighboringTiles.Where(t => t.isZoneable).Count() == 8)
         .RandomElement();
 }
