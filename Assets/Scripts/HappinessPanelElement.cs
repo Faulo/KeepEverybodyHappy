@@ -18,7 +18,9 @@ public class HappinessPanelElement : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI dislikesText = default;
     [SerializeField]
-    private TextMeshProUGUI placedText = default;
+    private TextMeshProUGUI valuableText = default;
+    [SerializeField]
+    private TextMeshProUGUI homelessText = default;
     [SerializeField]
     private Slider slider = default;
     [SerializeField]
@@ -27,8 +29,10 @@ public class HappinessPanelElement : MonoBehaviour
     private TextMeshProUGUI deltaText = default;
     [SerializeField]
     private Color increaseHappinessColor = default;
+    private string increaseHappinessString => ColorUtility.ToHtmlStringRGB(increaseHappinessColor);
     [SerializeField]
     private Color decreaseHappinessColor = default;
+    private string decreaseHappinessString => ColorUtility.ToHtmlStringRGB(decreaseHappinessColor);
 
     private FactionInstance factionInstance;
 
@@ -41,17 +45,18 @@ public class HappinessPanelElement : MonoBehaviour
 
     void Update()
     {
-        slider.value = factionInstance.globalHappiness;
-        placedText.text = string.Format(
-            "Placed: {0}/{1}",
+        homelessText.text = string.Format(
+            "Placed: <color=#{0}>{1}/{2}</color>",
+            factionInstance.numberOfHomelessDudes == 0 ? increaseHappinessString : decreaseHappinessString,
             factionInstance.numberOfResidentDudes,
             factionInstance.numberOfDudes
         );
+        slider.value = factionInstance.deltaHappiness;
         deltaText.text = string.Format(
             "Happiness: <color=#{0}>{1}{2}</color>",
-            ColorUtility.ToHtmlStringRGB(factionInstance.deltaHappiness > 0 ? increaseHappinessColor : decreaseHappinessColor),
-            factionInstance.deltaHappiness > 0 ? "+" : "",
-            factionInstance.deltaHappiness.ToString("F1")
+            factionInstance.deltaHappiness > 0 ? increaseHappinessString : decreaseHappinessString,
+            factionInstance.deltaHappiness > 0 ? "+" : "-",
+            Mathf.Abs(factionInstance.deltaHappiness).ToString("F1")
         );
     }
 
@@ -67,20 +72,25 @@ public class HappinessPanelElement : MonoBehaviour
 
         });
         factionInstance.faction.likesBeingNextTo
-            .Union(factionInstance.faction.likesHavingAccessTo)
             .Where(level.factions.Contains)
             .ForAll(AddLike);
         factionInstance.faction.dislikesBeingNextTo
             .Union(factionInstance.faction.dislikesHavingAccessTo)
             .Where(level.factions.Contains)
             .ForAll(AddDislike);
+        factionInstance.faction.likesHavingAccessTo
+            .Union(factionInstance.faction.likesHavingAccessTo)
+            .Where(level.factions.Contains)
+            .ForAll(AddValuable);
     }
     private void AddLike(Faction faction)
     {
         likesText.text += faction.icon;
     }
-    private void AddDislike(Faction faction)
-    {
+    private void AddDislike(Faction faction) {
         dislikesText.text += faction.icon;
+    }
+    private void AddValuable(Faction faction) {
+        valuableText.text += faction.icon;
     }
 }
