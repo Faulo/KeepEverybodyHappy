@@ -20,12 +20,11 @@ MonoBehaviour:
   homelessUnhappiness: -8
   likesHavingAccessTo:
   - {fileID: 11400000, guid: 94a6a0236c8e32b4b99873cce0b3e5d2, type: 2}
+  - {fileID: 11400000, guid: b4349fe0f851abd498a95b3e166301ac, type: 2}
   likesBeingNextTo:
-  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 43370dd3edaadee49bd9ad0f4d892ade, type: 2}
   - {fileID: 11400000, guid: d18dd990e3ccc6c4bb0a37847da7776e, type: 2}
   - {fileID: 11400000, guid: 7b2146744c01dc144b33cfb0ade148fd, type: 2}
-  dislikesHavingAccessTo:
-  - {fileID: 11400000, guid: b4349fe0f851abd498a95b3e166301ac, type: 2}
-  - {fileID: 11400000, guid: c4e8b7849b1623947a0b11edb1ada3eb, type: 2}
+  dislikesHavingAccessTo: []
   dislikesBeingNextTo: []
   cursor_texture: {fileID: 2800000, guid: 5f0b1b10618fc34428b013e437a973b1, type: 3}
