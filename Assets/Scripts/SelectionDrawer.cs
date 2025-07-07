@@ -108,7 +108,7 @@ public class SelectionDrawer : MonoBehaviour
         SelectionSize = new Vector2((drawStartPoint.x - drawEndPoint.x), (drawStartPoint.z - drawEndPoint.z)) * -1f;
         SelectionCenter = drawStartPoint + new Vector3(SelectionSize.x * .5f, 2f, SelectionSize.y * .5f);
         boxCollider.center = new Vector3(SelectionCenter.x, 1f, SelectionCenter.z);
-        boxCollider.size = new Vector3(SelectionSize.x, 2f, SelectionSize.y);
+        boxCollider.size = new Vector3(Mathf.Abs(SelectionSize.x), 2f, Mathf.Abs(SelectionSize.y));
     }
 
     private void DrawSelection()
