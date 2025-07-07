@@ -36,8 +36,6 @@ public class HappinessPanelElement : MonoBehaviour
 
     private FactionInstance factionInstance;
 
-    private Vector2 cursorHitspot = new Vector2(400, 0);
-
     void Start()
     {
         fillImage.color = factionInstance.faction.tileColor;
@@ -68,7 +66,6 @@ public class HappinessPanelElement : MonoBehaviour
         buildButton.onClick.AddListener(() =>
         {
             FindObjectOfType<SelectionDrawer>().CurrentFaction = factionInstance.faction;
-            Cursor.SetCursor(factionInstance.faction.cursor_texture, cursorHitspot, CursorMode.Auto);
 
         });
         factionInstance.faction.likesBeingNextTo

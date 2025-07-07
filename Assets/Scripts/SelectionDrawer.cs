@@ -55,7 +55,13 @@ public class SelectionDrawer : MonoBehaviour
     public Faction CurrentFaction
     {
         get => currentFaction;
-        set => currentFaction = value;
+        set {
+            currentFaction = value;
+
+            if (value) {
+                Cursor.SetCursor(value.cursor_texture, new Vector2(400, 0), CursorMode.Auto);
+            }
+        }
     }
 
     private void Awake()
@@ -65,7 +71,7 @@ public class SelectionDrawer : MonoBehaviour
         mesh = meshFilter.mesh;
         cam = Camera.main;
         boxCollider = GetComponent<BoxCollider>();
-        
+        CurrentFaction = currentFaction;
     }
 
     private void Update()
